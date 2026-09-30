@@ -1,0 +1,242 @@
+<div class="checkout-page">
+
+  <!-- Checkout Header -->
+
+  <div class="checkout-header">
+
+    <p>ZELL COLLECTION</p>
+
+    <h1>Checkout</h1>
+
+    <span>Complete your order</span>
+
+  </div>
+
+
+  <!-- Checkout Content -->
+
+  <div class="checkout-container">
+
+    <!-- Shipping Details -->
+
+    <div class="shipping-section">
+
+      <h2>Shipping Address</h2>
+
+
+      <div class="form-group">
+
+        <label for="name">
+          Full Name
+        </label>
+
+        <input
+          id="name"
+          type="text"
+          name="name"
+          [(ngModel)]="shippingDetails.name"
+          placeholder="Enter your full name">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="phone">
+          Phone Number
+        </label>
+
+        <input
+          id="phone"
+          type="tel"
+          name="phone"
+          [(ngModel)]="shippingDetails.phone"
+          placeholder="Enter your phone number">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="address">
+          Address
+        </label>
+
+        <textarea
+          id="address"
+          name="address"
+          rows="4"
+          [(ngModel)]="shippingDetails.address"
+          placeholder="House name, street, area">
+        </textarea>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label for="city">
+            City
+          </label>
+
+          <input
+            id="city"
+            type="text"
+            name="city"
+            [(ngModel)]="shippingDetails.city"
+            placeholder="City">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="pincode">
+            PIN Code
+          </label>
+
+          <input
+            id="pincode"
+            type="text"
+            name="pincode"
+            [(ngModel)]="shippingDetails.pincode"
+            placeholder="PIN Code">
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Payment Method -->
+
+<div class="payment-section">
+
+  <h2>
+    Payment Method
+  </h2>
+
+  <div class="payment-options">
+
+    <label>
+      <input
+        type="radio"
+        name="paymentMethod"
+        value="Cash on Delivery"
+        [(ngModel)]="paymentMethod">
+
+      <span>
+        Cash on Delivery
+      </span>
+    </label>
+
+
+    <label>
+      <input
+        type="radio"
+        name="paymentMethod"
+        value="UPI"
+        [(ngModel)]="paymentMethod">
+
+      <span>
+        UPI
+      </span>
+    </label>
+
+
+    <label>
+      <input
+        type="radio"
+        name="paymentMethod"
+        value="Card Payment"
+        [(ngModel)]="paymentMethod">
+
+      <span>
+        Card Payment
+      </span>
+    </label>
+
+  </div>
+
+</div>
+
+
+    <!-- Order Summary -->
+
+    <div class="order-summary">
+
+      <h2>Order Summary</h2>
+
+
+      @if (cartItems$ | async; as items) {
+
+        @if (items.length > 0) {
+
+          @for (item of items; track item.product.id) {
+
+            <div class="order-item">
+
+              <div>
+
+                <h3>
+                  {{ item.product.name }}
+                </h3>
+
+                <p>
+                  Qty: {{ item.quantity }}
+                </p>
+
+              </div>
+
+              <span>
+                ₹{{ item.product.price * item.quantity }}
+              </span>
+
+            </div>
+
+          }
+
+        } @else {
+
+          <p>
+            Your cart is empty.
+          </p>
+
+        }
+
+      }
+
+
+      <!-- Total -->
+
+      <div class="summary-total">
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+          ₹{{ cartTotal$ | async }}
+        </strong>
+
+      </div>
+
+
+      <!-- Place Order -->
+
+      <button
+        type="button"
+        class="place-order-button"
+        (click)="placeOrder()">
+
+        Place Order
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

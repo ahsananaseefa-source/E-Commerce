@@ -1,0 +1,619 @@
+{
+  "wishlist": [
+    {
+      "userId": 0,
+      "productId": "1",
+      "addedAt": "2026-09-30T03:18:28.953Z",
+      "id": "iBqC3S8VjLM"
+    }
+  ],
+  "cart": [],
+  "user": [
+    {
+      "id": "rwxtqLmz3m4",
+      "name": "ahsana",
+      "email": "aahsan@gmail.com",
+      "password": "asgfuyghf",
+      "phone": "8976547353"
+    },
+    {
+      "name": "gfdsffghyrt",
+      "email": "athtbrteg@gmail.com",
+      "password": "wwwwwwwer",
+      "id": "CjLclqphiZ8"
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "id": "RO9I8NWU5q0"
+    },
+    {
+      "name": "Ahsana Naseefa",
+      "email": "ahsananaseefa@gmail.com",
+      "password": "9567Ahsana@",
+      "id": "xj01-Jv3a5s"
+    }
+  ],
+  "order": [
+    {
+      "id": "YMhVzt2q_gc",
+      "userId": 1,
+      "items": [
+        {
+          "product": {
+            "id": "2",
+            "name": "Twisted Pearl Ring",
+            "category": "Rings",
+            "price": 899,
+            "image": "assets/products/ring-2.jpg",
+            "description": "Elegant twisted ring with a delicate pearl detail.",
+            "rating": 4.7,
+            "stock": 18
+          },
+          "quantity": 6
+        }
+      ],
+      "totalAmount": 5394,
+      "shippingAddress": "ahsana, 9567537312, koppath paramel, pattambi, 679306",
+      "orderDate": "2026-09-29T05:49:08.755Z",
+      "status": "Cancelled"
+    },
+    {
+      "id": "pKwfw3eKaHM",
+      "userId": 1,
+      "items": [
+        {
+          "product": {
+            "id": "1",
+            "name": "Classic Gold Band",
+            "category": "Rings",
+            "price": 799,
+            "image": "assets/products/ring-1.jpg",
+            "description": "Minimal gold-finish anti-tarnish ring for everyday wear.",
+            "rating": 4.5,
+            "stock": 25
+          },
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 799,
+      "shippingAddress": "ahsana, 9567537312, koppath paramel house, pattambi, 670306",
+      "orderDate": "2026-09-29T06:52:42.780Z",
+      "status": "Cancelled"
+    },
+    {
+      "id": "gbADMdb1Ack",
+      "userId": 1,
+      "items": [
+        {
+          "product": {
+            "id": "4",
+            "name": "Open Leaf Ring",
+            "category": "Rings",
+            "price": 749,
+            "image": "assets/products/ring-4.jpg",
+            "description": "Nature-inspired open ring with a delicate leaf design.",
+            "rating": 4.3,
+            "stock": 30
+          },
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 749,
+      "shippingAddress": "ahsasna, 9567537312, koppath , pattambi, 679306",
+      "orderDate": "2026-09-29T06:54:50.261Z",
+      "status": "Pending"
+    },
+    {
+      "id": "6Sr6Y0gVGPo",
+      "userId": 1,
+      "items": [
+        {
+          "product": {
+            "id": "4",
+            "name": "Open Leaf Ring",
+            "category": "Rings",
+            "price": 749,
+            "image": "assets/products/ring-4.jpg",
+            "description": "Nature-inspired open ring with a delicate leaf design.",
+            "rating": 4.3,
+            "stock": 30
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "7",
+            "name": "Golden Hoop Earrings",
+            "category": "Earrings",
+            "price": 799,
+            "image": "assets/products/earring-2.jpg",
+            "description": "Classic lightweight hoops for everyday styling.",
+            "rating": 4.5,
+            "stock": 25
+          },
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 1548,
+      "shippingAddress": "ahsana, 7896543726, koppath house, mele pattambi, 670306",
+      "orderDate": "2026-09-29T06:59:39.822Z",
+      "status": "Cancelled"
+    },
+    {
+      "id": "QcB9y65qlSM",
+      "userId": 1,
+      "items": [
+        {
+          "product": {
+            "id": "4",
+            "name": "Open Leaf Ring",
+            "category": "Rings",
+            "price": 749,
+            "image": "assets/products/ring-4.jpg",
+            "description": "Nature-inspired open ring with a delicate leaf design.",
+            "rating": 4.3,
+            "stock": 30
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "7",
+            "name": "Golden Hoop Earrings",
+            "category": "Earrings",
+            "price": 799,
+            "image": "assets/products/earring-2.jpg",
+            "description": "Classic lightweight hoops for everyday styling.",
+            "rating": 4.5,
+            "stock": 25
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "23",
+            "name": "Layered Chain Necklace",
+            "category": "Chains",
+            "price": 1399,
+            "image": "assets/products/chain-3.jpg",
+            "description": "Trendy layered chain necklace with multiple textures.",
+            "rating": 4.6,
+            "stock": 12
+          },
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 2947,
+      "shippingAddress": "ahsana, 9567537312, koppath pareml, pattambi, 670654",
+      "orderDate": "2026-09-29T07:02:34.796Z",
+      "status": "Cancelled"
+    },
+    {
+      "id": "cyUC-ciitXw",
+      "userId": 1,
+      "items": [
+        {
+          "product": {
+            "id": "4",
+            "name": "Open Leaf Ring",
+            "category": "Rings",
+            "price": 749,
+            "image": "assets/products/ring-4.jpg",
+            "description": "Nature-inspired open ring with a delicate leaf design.",
+            "rating": 4.3,
+            "stock": 30
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "7",
+            "name": "Golden Hoop Earrings",
+            "category": "Earrings",
+            "price": 799,
+            "image": "assets/products/earring-2.jpg",
+            "description": "Classic lightweight hoops for everyday styling.",
+            "rating": 4.5,
+            "stock": 25
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "23",
+            "name": "Layered Chain Necklace",
+            "category": "Chains",
+            "price": 1399,
+            "image": "assets/products/chain-3.jpg",
+            "description": "Trendy layered chain necklace with multiple textures.",
+            "rating": 4.6,
+            "stock": 12
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "5",
+            "name": "Heart Detail Ring",
+            "category": "Rings",
+            "price": 849,
+            "image": "assets/products/ring-5.jpg",
+            "description": "Delicate heart-detail ring with a polished finish.",
+            "rating": 4.6,
+            "stock": 22
+          },
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 3796,
+      "shippingAddress": "naseefa, 7281758884, home, pattambi, 679306",
+      "orderDate": "2026-09-29T07:15:50.502Z",
+      "status": "Pending"
+    },
+    {
+      "id": "c-Ii8IoNG3o",
+      "userId": 1,
+      "items": [
+        {
+          "product": {
+            "id": "1",
+            "name": "Classic Gold Band",
+            "category": "Rings",
+            "price": 799,
+            "image": "assets/products/ring-1.jpg",
+            "description": "Minimal gold-finish anti-tarnish ring for everyday wear.",
+            "rating": 4.5,
+            "stock": 25
+          },
+          "quantity": 2
+        }
+      ],
+      "totalAmount": 1598,
+      "shippingAddress": "ahsana, 9567537312, home, pattambi, 679306",
+      "orderDate": "2026-09-29T08:25:30.681Z",
+      "status": "Success"
+    },
+    {
+      "id": "L68qW3QaIlE",
+      "userId": 1,
+      "items": [
+        {
+          "product": {
+            "id": "1",
+            "name": "Classic Gold Band",
+            "category": "Rings",
+            "price": 799,
+            "image": "assets/products/ring-1.jpg",
+            "description": "Minimal gold-finish anti-tarnish ring for everyday wear.",
+            "rating": 4.5,
+            "stock": 25
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "2",
+            "name": "Twisted Pearl Ring",
+            "category": "Rings",
+            "price": 899,
+            "image": "assets/products/ring-2.jpg",
+            "description": "Elegant twisted ring with a delicate pearl detail.",
+            "rating": 4.7,
+            "stock": 18
+          },
+          "quantity": 2
+        }
+      ],
+      "totalAmount": 2597,
+      "shippingAddress": "ahsana naseefa, 9567537312, house, pattambi, 679306",
+      "orderDate": "2026-09-30T03:23:03.940Z",
+      "status": "Success",
+      "paymentMethod": "Cash on Delivery"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Classic Gold Band",
+      "category": "Rings",
+      "price": 799,
+      "image": "assets/products/ring-1.jpg",
+      "description": "Minimal gold-finish anti-tarnish ring for everyday wear.",
+      "rating": 4.5,
+      "stock": 25
+    },
+    {
+      "id": "2",
+      "name": "Twisted Pearl Ring",
+      "category": "Rings",
+      "price": 899,
+      "image": "assets/products/ring-2.jpg",
+      "description": "Elegant twisted ring with a delicate pearl detail.",
+      "rating": 4.7,
+      "stock": 18
+    },
+    {
+      "id": "3",
+      "name": "Crescent Stone Ring",
+      "category": "Rings",
+      "price": 949,
+      "image": "assets/products/ring-3.jpg",
+      "description": "Stylish crescent-shaped ring with a subtle stone accent.",
+      "rating": 4.4,
+      "stock": 20
+    },
+    {
+      "id": "4",
+      "name": "Open Leaf Ring",
+      "category": "Rings",
+      "price": 749,
+      "image": "assets/products/ring-4.jpg",
+      "description": "Nature-inspired open ring with a delicate leaf design.",
+      "rating": 4.3,
+      "stock": 30
+    },
+    {
+      "id": "5",
+      "name": "Heart Detail Ring",
+      "category": "Rings",
+      "price": 849,
+      "image": "assets/products/ring-5.jpg",
+      "description": "Delicate heart-detail ring with a polished finish.",
+      "rating": 4.6,
+      "stock": 22
+    },
+    {
+      "id": "6",
+      "name": "Pearl Drop Earrings",
+      "category": "Earrings",
+      "price": 999,
+      "image": "assets/products/earring-1.jpg",
+      "description": "Elegant pearl drop earrings with a polished finish.",
+      "rating": 4.7,
+      "stock": 18
+    },
+    {
+      "id": "7",
+      "name": "Golden Hoop Earrings",
+      "category": "Earrings",
+      "price": 799,
+      "image": "assets/products/earring-2.jpg",
+      "description": "Classic lightweight hoops for everyday styling.",
+      "rating": 4.5,
+      "stock": 25
+    },
+    {
+      "id": "8",
+      "name": "Floral Stud Earrings",
+      "category": "Earrings",
+      "price": 699,
+      "image": "assets/products/earring-3.jpg",
+      "description": "Small floral studs with a clean elegant design.",
+      "rating": 4.4,
+      "stock": 30
+    },
+    {
+      "id": "9",
+      "name": "Crystal Drop Earrings",
+      "category": "Earrings",
+      "price": 1199,
+      "image": "assets/products/earring-4.jpg",
+      "description": "Sparkling crystal drop earrings for special occasions.",
+      "rating": 4.8,
+      "stock": 12
+    },
+    {
+      "id": "10",
+      "name": "Twist Hoop Earrings",
+      "category": "Earrings",
+      "price": 849,
+      "image": "assets/products/earring-5.jpg",
+      "description": "Modern twisted hoops with a smooth gold finish.",
+      "rating": 4.5,
+      "stock": 20
+    },
+    {
+      "id": "11",
+      "name": "Classic Chain Bracelet",
+      "category": "Bracelets",
+      "price": 899,
+      "image": "assets/products/bracelet-1.jpg",
+      "description": "Minimal chain bracelet designed for everyday wear.",
+      "rating": 4.5,
+      "stock": 22
+    },
+    {
+      "id": "12",
+      "name": "Pearl Charm Bracelet",
+      "category": "Bracelets",
+      "price": 1099,
+      "image": "assets/products/bracelet-2.jpg",
+      "description": "Elegant bracelet with delicate pearl charms.",
+      "rating": 4.7,
+      "stock": 16
+    },
+    {
+      "id": "13",
+      "name": "Infinity Bracelet",
+      "category": "Bracelets",
+      "price": 849,
+      "image": "assets/products/bracelet-3.jpg",
+      "description": "Symbolic infinity bracelet with a polished finish.",
+      "rating": 4.5,
+      "stock": 20
+    },
+    {
+      "id": "14",
+      "name": "Heart Charm Bracelet",
+      "category": "Bracelets",
+      "price": 799,
+      "image": "assets/products/bracelet-4.jpg",
+      "description": "Delicate bracelet featuring a heart-shaped charm.",
+      "rating": 4.4,
+      "stock": 26
+    },
+    {
+      "id": "15",
+      "name": "Snake Chain Bracelet",
+      "category": "Bracelets",
+      "price": 999,
+      "image": "assets/products/bracelet-5.jpg",
+      "description": "Smooth snake-chain bracelet with a modern appearance.",
+      "rating": 4.6,
+      "stock": 18
+    },
+    {
+      "id": "16",
+      "name": "Classic Gold Bangle",
+      "category": "Bangles",
+      "price": 899,
+      "image": "assets/products/bangle-1.jpg",
+      "description": "Classic polished bangle suitable for everyday styling.",
+      "rating": 4.5,
+      "stock": 25
+    },
+    {
+      "id": "17",
+      "name": "Twisted Edge Bangle",
+      "category": "Bangles",
+      "price": 999,
+      "image": "assets/products/bangle-2.jpg",
+      "description": "Elegant bangle featuring a twisted edge design.",
+      "rating": 4.6,
+      "stock": 18
+    },
+    {
+      "id": "18",
+      "name": "Pearl Accent Bangle",
+      "category": "Bangles",
+      "price": 1199,
+      "image": "assets/products/bangle-3.jpg",
+      "description": "Sophisticated bangle with subtle pearl accents.",
+      "rating": 4.7,
+      "stock": 15
+    },
+    {
+      "id": "19",
+      "name": "Slim Minimal Bangle",
+      "category": "Bangles",
+      "price": 649,
+      "image": "assets/products/bangle-4.jpg",
+      "description": "Slim lightweight bangle for simple daily outfits.",
+      "rating": 4.3,
+      "stock": 30
+    },
+    {
+      "id": "20",
+      "name": "Leaf Pattern Bangle",
+      "category": "Bangles",
+      "price": 949,
+      "image": "assets/products/bangle-5.jpg",
+      "description": "Nature-inspired bangle with delicate leaf patterns.",
+      "rating": 4.5,
+      "stock": 20
+    },
+    {
+      "id": "21",
+      "name": "Minimal Gold Chain",
+      "category": "Chains",
+      "price": 999,
+      "image": "assets/products/chain-1.jpg",
+      "description": "Minimal gold-finish chain suitable for everyday wear.",
+      "rating": 4.5,
+      "stock": 20
+    },
+    {
+      "id": "22",
+      "name": "Heart Pendant Chain",
+      "category": "Chains",
+      "price": 1199,
+      "image": "assets/products/chain-2.jpg",
+      "description": "Delicate chain featuring a heart-shaped pendant.",
+      "rating": 4.7,
+      "stock": 16
+    },
+    {
+      "id": "23",
+      "name": "Layered Chain Necklace",
+      "category": "Chains",
+      "price": 1399,
+      "image": "assets/products/chain-3.jpg",
+      "description": "Trendy layered chain necklace with multiple textures.",
+      "rating": 4.6,
+      "stock": 12
+    },
+    {
+      "id": "24",
+      "name": "Pearl Pendant Chain",
+      "category": "Chains",
+      "price": 1299,
+      "image": "assets/products/chain-4.jpg",
+      "description": "Elegant chain finished with a classic pearl pendant.",
+      "rating": 4.8,
+      "stock": 14
+    },
+    {
+      "id": "25",
+      "name": "Snake Chain Necklace",
+      "category": "Chains",
+      "price": 1099,
+      "image": "assets/products/chain-5.jpg",
+      "description": "Smooth snake-chain necklace with a modern finish.",
+      "rating": 4.5,
+      "stock": 18
+    },
+    {
+      "id": "26",
+      "name": "Classic Anklet",
+      "category": "Anklets",
+      "price": 799,
+      "image": "assets/products/anklet-1.jpg",
+      "description": "Minimal gold-finish anklet for everyday styling.",
+      "rating": 4.5,
+      "stock": 25
+    },
+    {
+      "id": "27",
+      "name": "Pearl Charm Anklet",
+      "category": "Anklets",
+      "price": 999,
+      "image": "assets/products/anklet-2.jpg",
+      "description": "Elegant anklet decorated with small pearl charms.",
+      "rating": 4.7,
+      "stock": 18
+    },
+    {
+      "id": "28",
+      "name": "Heart Charm Anklet",
+      "category": "Anklets",
+      "price": 849,
+      "image": "assets/products/anklet-3.jpg",
+      "description": "Delicate anklet featuring small heart charms.",
+      "rating": 4.5,
+      "stock": 22
+    },
+    {
+      "id": "29",
+      "name": "Double Chain Anklet",
+      "category": "Anklets",
+      "price": 1099,
+      "image": "assets/products/anklet-4.jpg",
+      "description": "Stylish double-chain anklet for a layered look.",
+      "rating": 4.6,
+      "stock": 16
+    },
+    {
+      "id": "30",
+      "name": "Star Charm Anklet",
+      "category": "Anklets",
+      "price": 799,
+      "image": "assets/products/anklet-5.jpg",
+      "description": "Lightweight anklet decorated with tiny star charms.",
+      "rating": 4.4,
+      "stock": 26
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

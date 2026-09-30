@@ -1,0 +1,263 @@
+<app-header></app-header>
+
+
+<div class="products-page">
+
+  <!-- =========================
+       PRODUCTS HEADER
+  ========================= -->
+
+  <section class="products-header">
+
+    <p class="section-label">
+      ZELL COLLECTION
+    </p>
+
+    <h1>
+
+      @if (selectedCategory) {
+
+        {{ selectedCategory }}
+
+      }
+
+      @else if (searchTerm) {
+
+        Search Result
+
+      }
+
+      @else {
+
+        All Jewellery
+
+      }
+
+    </h1>
+
+
+    @if (searchTerm) {
+
+      <p class="header-description">
+        Showing results for
+        <span>"{{ searchTerm }}"</span>
+      </p>
+
+    }
+
+    @else if (selectedCategory) {
+
+      <p class="header-description">
+        Explore our
+        <span>{{ selectedCategory }}</span>
+        collection.
+      </p>
+
+    }
+
+    @else {
+
+      <p class="header-description">
+        Discover our collection of elegant
+        anti-tarnish jewellery.
+      </p>
+
+    }
+
+  </section>
+
+
+
+  <!-- =========================
+       LOADING
+  ========================= -->
+
+  @if (loading$ | async) {
+
+    <div class="message">
+
+      <div class="loading-icon"></div>
+
+      <p>
+        Discovering our collection...
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- =========================
+       ERROR
+  ========================= -->
+
+  @else if (error$ | async) {
+
+    <div class="message">
+
+      <p class="message-title">
+        Something went wrong
+      </p>
+
+      <p>
+        We couldn't load the jewellery collection.
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- =========================
+       PRODUCTS
+  ========================= -->
+
+  @else {
+
+    @if (products$ | async; as products) {
+
+      <div class="product-grid">
+
+        @for (product of products; track product.id) {
+
+          @if (
+            (!selectedCategory ||
+              product.category === selectedCategory)
+            &&
+            (!searchTerm ||
+              product.name
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase())
+              ||
+              product.category
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase())
+              ||
+              product.description
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()))
+          ) {
+
+            <!-- PRODUCT CARD -->
+
+            <article
+              class="product-card"
+              [routerLink]="['/products', product.id]">
+
+
+              <!-- =========================
+                   PRODUCT IMAGE
+              ========================= -->
+
+              <div class="product-image">
+
+                <img
+                  [src]="product.image"
+                  [alt]="product.name">
+
+                <!-- IMAGE OVERLAY -->
+
+                <div class="image-overlay">
+
+                  <span>
+                    View Details
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <!-- =========================
+                   PRODUCT DETAILS
+              ========================= -->
+
+              <div class="product-details">
+
+                <p class="category">
+                  {{ product.category }}
+                </p>
+
+                <h3>
+                  {{ product.name }}
+                </h3>
+
+                <p class="description">
+                  {{ product.description }}
+                </p>
+
+
+                <!-- PRICE + RATING -->
+
+                <div class="product-info">
+
+                  <span class="price">
+                    ₹{{ product.price }}
+                  </span>
+
+                  <span class="rating">
+                    ★ {{ product.rating }}
+                  </span>
+
+                </div>
+
+
+                <!-- STOCK -->
+
+                <p class="stock">
+                  {{ product.stock }} available
+                </p>
+
+
+                <!-- =========================
+                     ACTIONS
+                ========================= -->
+
+                <div class="product-actions">
+
+                  <button
+                    type="button"
+                    class="cart-button"
+                    (click)="
+                      $event.stopPropagation();
+                      addProductToCart(product)
+                    ">
+
+                    Add to Cart
+
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="wishlist-button"
+                    (click)="
+                      $event.stopPropagation();
+                      addProductToWishlist(product)
+                    "
+                    aria-label="Add to wishlist">
+
+                    ♡
+
+                  </button>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          }
+
+        }
+
+      </div>
+
+    }
+
+  }
+
+</div>
+
+
+<app-footer></app-footer>

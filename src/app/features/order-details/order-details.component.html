@@ -1,0 +1,217 @@
+<div class="order-details-page">
+
+  <div class="order-header">
+
+    <p>ZELL COLLECTION</p>
+
+    <h1>Order Details</h1>
+
+    <span>
+      View your order information
+    </span>
+
+  </div>
+
+
+  @if (order$ | async; as order) {
+
+    <div class="order-container">
+
+
+      <!-- Order Top -->
+
+      <div class="order-top">
+
+        <div>
+
+          <p class="label">
+            Order ID
+          </p>
+
+          <h2>
+            #{{ order.id }}
+          </h2>
+
+        </div>
+
+
+        <div>
+
+          <p class="label">
+            Status
+          </p>
+
+          <span class="order-status">
+            {{ order.status }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- Order Information -->
+
+      <div class="order-info">
+
+        <div>
+
+          <p>
+            Order Date
+          </p>
+
+          <strong>
+            {{ order.orderDate | date:'dd MMM yyyy, hh:mm a' }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <p>
+            Total Amount
+          </p>
+
+          <strong>
+            ₹{{ order.totalAmount }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <p>
+            Payment Method
+          </p>
+
+          <strong>
+            {{ order.paymentMethod }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- Products -->
+
+      <div class="products-section">
+
+        <h2>
+          Ordered Products
+        </h2>
+
+
+        @for (
+          item of order.items;
+          track item.product.id
+        ) {
+
+          <div class="product-item">
+
+            <img
+              [src]="item.product.image"
+              [alt]="item.product.name"
+            >
+
+
+            <div class="product-info">
+
+              <h3>
+                {{ item.product.name }}
+              </h3>
+
+              <p>
+                {{ item.product.category }}
+              </p>
+
+              <span>
+                Qty: {{ item.quantity }}
+              </span>
+
+            </div>
+
+
+            <strong>
+              ₹{{ item.product.price * item.quantity }}
+            </strong>
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <!-- Shipping Address -->
+
+      <div class="shipping-section">
+
+        <h2>
+          Shipping Address
+        </h2>
+
+        <p>
+          {{ order.shippingAddress }}
+        </p>
+
+      </div>
+
+
+      <!-- Total -->
+
+      <div class="total-section">
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+          ₹{{ order.totalAmount }}
+        </strong>
+
+      </div>
+
+
+      <!-- Cancel Order -->
+
+      @if (canCancelOrder(order.status)) {
+
+        <div class="cancel-order-section">
+
+          <button
+            type="button"
+            class="cancel-order-button"
+            (click)="cancelOrder(order.id)"
+          >
+            Cancel Order
+          </button>
+
+        </div>
+
+      }
+
+
+    </div>
+
+
+  } @else {
+
+    <div class="empty-order">
+
+      <h2>
+        Order not found
+      </h2>
+
+      <p>
+        We couldn't find this order.
+      </p>
+
+    </div>
+
+  }
+
+
+</div>

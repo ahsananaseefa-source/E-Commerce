@@ -1,0 +1,204 @@
+ <div class="auth-page">
+
+  <div class="auth-card">
+
+    <div class="brand">
+      <p>ZELL COLLECTION</p>
+    </div>
+
+    <div class="auth-inner-box">
+
+      @if (isLogin) {
+
+        <h2>Welcome Back</h2>
+
+        <p class="subtitle">
+          Login to your account
+        </p>
+
+      } @else {
+
+        <h2>Create Account</h2>
+
+        <p class="subtitle">
+          Create your ZELL account to get started
+        </p>
+
+      }
+
+
+      <!-- NAME -->
+
+      @if (!isLogin) {
+
+        <div class="form-group">
+
+          <label>Name</label>
+
+          <input
+            type="text"
+            name="name"
+            [(ngModel)]="name"
+            placeholder="Enter your name"
+          >
+
+          @if (name && !isNameValid()) {
+
+            <p class="error-message">
+              Name must contain only letters and spaces and be
+              2–50 characters long.
+            </p>
+
+          }
+
+        </div>
+
+      }
+
+
+      <!-- EMAIL -->
+
+      <div class="form-group">
+
+        <label>Email</label>
+
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Enter your email"
+        >
+
+        @if (email && !isEmailValid()) {
+
+          <p class="error-message">
+            Please enter a valid email address.
+          </p>
+
+        }
+
+      </div>
+
+
+      <!-- PASSWORD -->
+
+      <div class="form-group">
+
+        <label>Password</label>
+
+        <div class="password-field">
+
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            name="password"
+            [(ngModel)]="password"
+            placeholder="Enter your password"
+          >
+
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="togglePassword()"
+          >
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+
+        </div>
+
+
+        @if (password && !isPasswordValid()) {
+
+          <div class="password-error">
+
+            <p>Password must contain:</p>
+
+            <ul>
+              <li>At least 8 characters</li>
+              <li>One uppercase letter</li>
+              <li>One lowercase letter</li>
+              <li>One number</li>
+              <li>One special character</li>
+            </ul>
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <!-- ERROR -->
+
+      @if (errorMessage) {
+
+        <p class="error-message form-message">
+          {{ errorMessage }}
+        </p>
+
+      }
+
+
+      <!-- SUCCESS -->
+
+      @if (successMessage) {
+
+        <p class="success-message">
+          {{ successMessage }}
+        </p>
+
+      }
+
+
+      <!-- SUBMIT -->
+
+      <button
+        type="button"
+        class="submit-button"
+        (click)="submitForm()"
+        [disabled]="!isFormValid()"
+      >
+        {{ isLogin ? "Login" : "Create Account" }}
+      </button>
+
+
+      <!-- SWITCH -->
+
+      @if (isLogin) {
+
+        <p class="switch-text">
+
+          Don't have an account?
+
+          <button
+            type="button"
+            class="switch-button"
+            (click)="switchMode()"
+          >
+            Create Account
+          </button>
+
+        </p>
+
+      } @else {
+
+        <p class="switch-text">
+
+          Already have an account?
+
+          <button
+            type="button"
+            class="switch-button"
+            (click)="switchMode()"
+          >
+            Login
+          </button>
+
+        </p>
+
+      }
+
+    </div>
+
+  </div>
+
+</div>

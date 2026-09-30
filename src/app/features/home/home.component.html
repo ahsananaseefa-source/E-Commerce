@@ -1,0 +1,299 @@
+<app-header></app-header>
+
+
+<div class="home">
+
+  <!-- =========================
+       HERO SECTION
+  ========================= -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <p>ZELL COLLECTIONS</p>
+
+      <h1>
+        Timeless Beauty,
+        Made to Last.
+      </h1>
+
+      <p>
+        Discover elegant anti-tarnish jewellery
+        designed for your everyday moments.
+      </p>
+
+      <a
+        routerLink="/products"
+        class="hero-button">
+
+        Shop Collection
+
+      </a>
+
+    </div>
+
+
+    <div class="hero-image">
+
+      <img
+        src="assets/images/hero-jewellery.jpg"
+        alt="ZELL Anti-Tarnish Jewellery">
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       CATEGORIES SECTION
+  ========================= -->
+
+  <section class="categories">
+
+    <p>EXPLORE ZELL</p>
+
+    <h2>
+      Shop by Category
+    </h2>
+
+    <div class="category-list">
+
+      @for (category of categories; track category) {
+
+        <a
+          class="category-card"
+          [routerLink]="['/products']"
+          [queryParams]="{ category: category }">
+
+          <div class="category-image">
+
+            @if (category === 'Rings') {
+
+              <img
+                src="assets/images/categories/rings.jpg"
+                alt="Rings">
+
+            }
+
+            @else if (category === 'Earrings') {
+
+              <img
+                src="assets/images/categories/earrings.jpg"
+                alt="Earrings">
+
+            }
+
+            @else if (category === 'Bracelets') {
+
+              <img
+                src="assets/images/categories/bracelets.jpg"
+                alt="Bracelets">
+
+            }
+
+            @else if (category === 'Bangles') {
+
+              <img
+                src="assets/images/categories/bangles.jpg"
+                alt="Bangles">
+
+            }
+
+            @else if (category === 'Chains') {
+
+              <img
+                src="assets/images/categories/chains.jpg"
+                alt="Chains">
+
+            }
+
+            @else if (category === 'Anklets') {
+
+              <img
+                src="assets/images/categories/anklets.jpg"
+                alt="Anklets">
+
+            }
+
+          </div>
+
+          <h3>
+            {{ category }}
+          </h3>
+
+        </a>
+
+      }
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       ABOUT ZELL SECTION
+  ========================= -->
+
+  <section class="about-section">
+
+    <div class="about-content">
+
+      <p class="section-label">
+        ABOUT ZELL
+      </p>
+
+      <h2>
+        Jewellery Made for
+        Everyday Elegance
+      </h2>
+
+      <p class="about-text">
+        ZELL is an anti-tarnish jewellery brand created
+        for women who love simple, elegant and timeless
+        pieces.
+      </p>
+
+      <p class="about-text">
+        Our collection is designed to complement everyday
+        outfits while offering the beauty and confidence
+        you look for in jewellery.
+      </p>
+
+      <a
+        routerLink="/products"
+        class="about-button">
+
+        Explore Collection
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       FEATURED PRODUCTS SECTION
+  ========================= -->
+
+  <section class="featured">
+
+    <p>
+      ZELL COLLECTION
+    </p>
+
+    <h2>
+      Featured Jewellery
+    </h2>
+
+
+    @if (loading$ | async) {
+
+      <p>
+        Loading products...
+      </p>
+
+    }
+
+    @else {
+
+      @if (error$ | async) {
+
+        <p>
+          Error loading products.
+        </p>
+
+      }
+
+      @else {
+
+        @if (products$ | async; as products) {
+
+          @if (products.length === 0) {
+
+            <p>
+              No products found.
+            </p>
+
+          }
+
+          @else {
+
+            <div class="product-list">
+
+              @for (
+                product of products.slice(0, 6);
+                track product.id
+              ) {
+
+                <div class="product-card">
+
+                  <!-- PRODUCT IMAGE -->
+
+                  <div class="product-image">
+
+                    <img
+                      [src]="product.image"
+                      [alt]="product.name">
+
+                  </div>
+
+
+                  <!-- PRODUCT DETAILS -->
+
+                  <h3>
+                    {{ product.name }}
+                  </h3>
+
+                  <p>
+                    {{ product.category }}
+                  </p>
+
+                  <p>
+                    ₹{{ product.price }}
+                  </p>
+
+                  <p>
+                    ★ {{ product.rating }}
+                  </p>
+
+
+                  <!-- VIEW PRODUCT -->
+
+                  <a
+                    [routerLink]="['/products', product.id]"
+                    class="product-button">
+
+                    View Product
+
+                  </a>
+
+                </div>
+
+              }
+
+            </div>
+
+          }
+
+        }
+
+      }
+
+    }
+
+  </section>
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<app-footer></app-footer>

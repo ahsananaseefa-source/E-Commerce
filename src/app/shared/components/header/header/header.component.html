@@ -1,0 +1,417 @@
+<header class="header">
+
+  <!-- =================================
+       MOBILE MENU BUTTON
+  ================================== -->
+
+  <button
+    type="button"
+    class="mobile-menu-button"
+    aria-label="Open menu"
+    (click)="toggleMobileMenu()">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+  </button>
+
+
+  <!-- =================================
+       LOGO
+  ================================== -->
+
+  <div class="logo">
+
+    <a
+      routerLink="/home"
+      (click)="closeMobileMenu()">
+
+      ZELL
+
+    </a>
+
+  </div>
+
+
+  <!-- =================================
+       DESKTOP NAVIGATION
+  ================================== -->
+
+  <nav class="navigation">
+
+    <a
+      routerLink="/home">
+
+      Home
+
+    </a>
+
+    <a
+      routerLink="/products">
+
+      Shop
+
+    </a>
+
+
+    <!-- CATEGORY -->
+
+    <div class="category-wrapper">
+
+      <button
+        type="button"
+        class="category-button"
+        (click)="toggleCategoryMenu()">
+
+        <span>
+          Category
+        </span>
+
+        <span
+          class="category-arrow"
+          [class.open]="showCategoryMenu">
+
+          ▾
+
+        </span>
+
+      </button>
+
+
+      @if (showCategoryMenu) {
+
+        <div class="category-menu">
+
+          <a
+            routerLink="/products"
+            [queryParams]="{ category: 'Rings' }"
+            (click)="closeCategoryMenu()">
+
+            Rings
+
+          </a>
+
+          <a
+            routerLink="/products"
+            [queryParams]="{ category: 'Earrings' }"
+            (click)="closeCategoryMenu()">
+
+            Earrings
+
+          </a>
+
+          <a
+            routerLink="/products"
+            [queryParams]="{ category: 'Bracelets' }"
+            (click)="closeCategoryMenu()">
+
+            Bracelets
+
+          </a>
+
+          <a
+            routerLink="/products"
+            [queryParams]="{ category: 'Bangles' }"
+            (click)="closeCategoryMenu()">
+
+            Bangles
+
+          </a>
+
+          <a
+            routerLink="/products"
+            [queryParams]="{ category: 'Chains' }"
+            (click)="closeCategoryMenu()">
+
+            Chains
+
+          </a>
+
+          <a
+            routerLink="/products"
+            [queryParams]="{ category: 'Anklets' }"
+            (click)="closeCategoryMenu()">
+
+            Anklets
+
+          </a>
+
+        </div>
+
+      }
+
+    </div>
+
+  </nav>
+
+
+  <!-- =================================
+       HEADER ACTIONS
+  ================================== -->
+
+  <div class="header-actions">
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+      <input
+        #searchInput
+        type="text"
+        placeholder="Search jewellery..."
+        (keyup.enter)="searchProduct(searchInput.value)">
+
+      <button
+        type="button"
+        class="search-icon"
+        aria-label="Search"
+        (click)="searchProduct(searchInput.value)">
+
+        <svg viewBox="0 0 24 24">
+
+          <circle
+            cx="11"
+            cy="11"
+            r="6">
+          </circle>
+
+          <path
+            d="M16 16L21 21">
+          </path>
+
+        </svg>
+
+      </button>
+
+    </div>
+
+
+    <!-- WISHLIST -->
+
+    <a
+      routerLink="/wishlist"
+      class="header-icon"
+      aria-label="Wishlist">
+
+      <svg viewBox="0 0 24 24">
+
+        <path
+          d="M20.8 8.7
+             C20.8 13.5 12 19 12 19
+             S3.2 13.5 3.2 8.7
+             C3.2 6.1 5 4.2 7.4 4.2
+             C9 4.2 10.5 5.1 12 6.5
+             C13.5 5.1 15 4.2 16.6 4.2
+             C19 4.2 20.8 6.1 20.8 8.7Z">
+        </path>
+
+      </svg>
+
+
+      @if (wishlistCount$ | async; as count) {
+
+        @if (count > 0) {
+
+          <span class="item-count">
+            {{ count }}
+          </span>
+
+        }
+
+      }
+
+    </a>
+
+
+    <!-- ACCOUNT -->
+
+    <a
+      routerLink="/auth"
+      class="header-icon"
+      aria-label="Account">
+
+      <svg viewBox="0 0 24 24">
+
+        <circle
+          cx="12"
+          cy="8"
+          r="4">
+        </circle>
+
+        <path
+          d="M4 21
+             C4 16.8 7.4 14 12 14
+             C16.6 14 20 16.8 20 21">
+        </path>
+
+      </svg>
+
+    </a>
+
+
+    <!-- ORDERS -->
+
+    <a
+      routerLink="/order"
+      class="header-icon"
+      aria-label="Orders">
+
+      <svg viewBox="0 0 24 24">
+
+        <path
+          d="M6 8H18L19.5 21H4.5L6 8Z">
+        </path>
+
+        <path
+          d="M9 8V6
+             C9 3.8 15 3.8 15 6V8">
+        </path>
+
+      </svg>
+
+    </a>
+
+
+    <!-- CART -->
+
+    <a
+      routerLink="/cart"
+      class="header-icon"
+      aria-label="Cart">
+
+      <svg viewBox="0 0 24 24">
+
+        <path
+          d="M3 4H5L7.2 15.2
+             C7.4 16.2 8.3 17 9.4 17
+             H18.2
+             C19.3 17 20.2 16.2 20.4 15.2
+             L22 8H6">
+        </path>
+
+        <circle
+          cx="9"
+          cy="20"
+          r="1">
+        </circle>
+
+        <circle
+          cx="18"
+          cy="20"
+          r="1">
+        </circle>
+
+      </svg>
+
+
+      @if (cartItemCount$ | async; as count) {
+
+        @if (count > 0) {
+
+          <span class="item-count">
+            {{ count }}
+          </span>
+
+        }
+
+      }
+
+    </a>
+
+  </div>
+
+
+  <!-- =================================
+       MOBILE NAVIGATION
+  ================================== -->
+
+  @if (showMobileMenu) {
+
+    <div class="mobile-menu">
+
+      <a
+        routerLink="/home"
+        (click)="closeMobileMenu()">
+
+        Home
+
+      </a>
+
+      <a
+        routerLink="/products"
+        (click)="closeMobileMenu()">
+
+        Shop
+
+      </a>
+
+
+      <div class="mobile-category">
+
+        <span>
+          Categories
+        </span>
+
+        <a
+          routerLink="/products"
+          [queryParams]="{ category: 'Rings' }"
+          (click)="closeMobileMenu()">
+
+          Rings
+
+        </a>
+
+        <a
+          routerLink="/products"
+          [queryParams]="{ category: 'Earrings' }"
+          (click)="closeMobileMenu()">
+
+          Earrings
+
+        </a>
+
+        <a
+          routerLink="/products"
+          [queryParams]="{ category: 'Bracelets' }"
+          (click)="closeMobileMenu()">
+
+          Bracelets
+
+        </a>
+
+        <a
+          routerLink="/products"
+          [queryParams]="{ category: 'Bangles' }"
+          (click)="closeMobileMenu()">
+
+          Bangles
+
+        </a>
+
+        <a
+          routerLink="/products"
+          [queryParams]="{ category: 'Chains' }"
+          (click)="closeMobileMenu()">
+
+          Chains
+
+        </a>
+
+        <a
+          routerLink="/products"
+          [queryParams]="{ category: 'Anklets' }"
+          (click)="closeMobileMenu()">
+
+          Anklets
+
+        </a>
+
+      </div>
+
+    </div>
+
+  }
+
+</header>

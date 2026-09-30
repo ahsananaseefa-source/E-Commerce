@@ -1,0 +1,172 @@
+<div class="cart-page">
+
+  <div class="cart-header">
+
+    <p>ZELL COLLECTION</p>
+
+    <h1>Shopping Cart</h1>
+
+    <span>Review your selected products</span>
+
+  </div>
+
+
+  @if (isCartEmpty$ | async) {
+
+    <div class="empty-cart">
+
+      <h2>Your cart is empty</h2>
+
+      <p>
+        Add some beautiful jewellery to your cart.
+      </p>
+
+    </div>
+
+  } @else {
+
+    @if (cartItems$ | async; as cartItems) {
+
+      <div class="cart-container">
+
+        <div class="cart-items">
+
+          @for (
+            item of cartItems;
+            track item.product.id
+          ) {
+
+            <div class="cart-item">
+
+              <!-- Product Image -->
+
+              <img
+                [src]="item.product.image"
+                [alt]="item.product.name"
+                class="cart-product-image">
+
+
+              <!-- Product Information -->
+
+              <div class="cart-product-info">
+
+                <p class="category">
+                  {{ item.product.category }}
+                </p>
+
+                <h2>
+                  {{ item.product.name }}
+                </h2>
+
+                <p class="price">
+                  ₹{{ item.product.price }}
+                </p>
+
+
+                <!-- Quantity -->
+
+                <div class="quantity-section">
+
+                  <span>
+                    Quantity
+                  </span>
+
+                  <div class="quantity-controls">
+
+                    <button
+                      type="button"
+                      (click)="decreaseQuantity(item.product.id)">
+
+                      −
+
+                    </button>
+
+                    <span>
+                      {{ item.quantity }}
+                    </span>
+
+                    <button
+                      type="button"
+                      (click)="increaseQuantity(item.product.id)">
+
+                      +
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+
+                <button
+                  type="button"
+                  class="remove-button"
+                  (click)="removeProduct(item.product.id)">
+
+                  Remove
+
+                </button>
+
+              </div>
+
+
+              <!-- Subtotal -->
+
+              <div class="cart-subtotal">
+
+                <span>
+                  Subtotal
+                </span>
+
+                <strong>
+                  ₹{{ item.product.price * item.quantity }}
+                </strong>
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+
+        <!-- Cart Summary -->
+
+        <div class="cart-summary">
+
+          <h2>
+            Order Summary
+          </h2>
+
+          <div class="summary-row">
+
+            <span>
+              Total
+            </span>
+
+            <strong>
+              ₹{{ totalAmount$ | async }}
+            </strong>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="clear-cart-button"
+            (click)="clearCart()">
+
+            Clear Cart
+
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
+  }
+
+</div>

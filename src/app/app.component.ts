@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
+import { Store } from '@ngrx/store';
+import { loadCart } from './store/cart/cart.actions';
+import { loadWishlist } from './store/wishlist/wishlist.actions';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -9,5 +11,13 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'project';
-}
+
+  private store = inject(Store);
+
+  constructor() {
+    this.store.dispatch(loadCart());
+     this.store.dispatch(loadWishlist());
+  }
+  
+  }
+
