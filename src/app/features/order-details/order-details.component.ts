@@ -10,6 +10,7 @@ import {
 } from '../../store/order/order.actions';
 
 import { selectOrders } from '../../store/order/order.selectors';
+import { HeaderComponent } from '../../shared/components/header/header/header.component';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { selectOrders } from '../../store/order/order.selectors';
 
   imports: [
     AsyncPipe,
-    DatePipe
+    DatePipe,HeaderComponent
   ],
 
   templateUrl: './order-details.component.html',

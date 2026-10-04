@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { User } from '../models/user.models';
 
 @Injectable({
@@ -19,6 +20,7 @@ export class UserService {
       this.apiUrl,
       user
     );
+
   }
 
 
@@ -27,9 +29,15 @@ export class UserService {
     password: string
   ): Observable<User[]> {
 
+    const params = new HttpParams()
+      .set('email', email)
+      .set('password', password);
+
     return this.http.get<User[]>(
-      `${this.apiUrl}?email=${email}&password=${password}`
+      this.apiUrl,
+      { params }
     );
+
   }
 
 
@@ -37,9 +45,14 @@ export class UserService {
     email: string
   ): Observable<User[]> {
 
+    const params = new HttpParams()
+      .set('email', email);
+
     return this.http.get<User[]>(
-      `${this.apiUrl}?email=${email}`
+      this.apiUrl,
+      { params }
     );
+
   }
 
 }

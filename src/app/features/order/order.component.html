@@ -1,74 +1,165 @@
+<app-header></app-header>
+
 <div class="order-page">
+
   <div class="order-header">
+
     <p>ZELL COLLECTION</p>
 
     <h1>My Orders</h1>
 
-    <span>View your order history</span>
+    <span>
+      View your order history
+    </span>
+
   </div>
 
+
   @if (loading$ | async) {
-    <p class="message">Loading orders...</p>
 
-  } @else if (error$ | async) {
-    <p class="message">Error loading orders.</p>
+    <p class="message">
+      Loading orders...
+    </p>
 
-  } @else {
+  }
+
+  @else if (error$ | async) {
+
+    <p class="message">
+      Error loading orders.
+    </p>
+
+  }
+
+  @else {
+
     @if (orders$ | async; as orders) {
-      @if (orders.length === 0) {
-        <div class="empty-orders">
-          <h2>No orders yet</h2>
 
-          <p>Your placed orders will appear here.</p>
+      @if (orders.length === 0) {
+
+        <div class="empty-orders">
+
+          <h2>
+            No orders yet
+          </h2>
+
+          <p>
+            Your placed orders will appear here.
+          </p>
+
         </div>
 
-      } @else {
-        <div class="orders-container">
-          @for (order of orders; track order.id) {
-            <div class="order-card">
-              <div class="order-top">
-                <div>
-                  <p class="order-label">Order ID</p>
+      }
 
-                  <h2>#{{ order.id }}</h2>
+      @else {
+
+        <div class="orders-container">
+
+          @for (
+            order of orders;
+            track order.id
+          ) {
+
+            <div class="order-card">
+
+              <div class="order-top">
+
+                <div>
+
+                  <p class="order-label">
+                    Order ID
+                  </p>
+
+                  <h2>
+                    #{{ order.id }}
+                  </h2>
+
                 </div>
+
 
                 <span class="order-status">
+
                   {{ order.status }}
+
                 </span>
+
               </div>
+
 
               <div class="order-details">
+
                 <div>
-                  <p>Order Date</p>
+
+                  <p>
+                    Order Date
+                  </p>
 
                   <strong>
-                    {{ order.orderDate | date: "dd MMM yyyy" }}
+
+                    {{
+                      order.orderDate
+                        | date: "dd MMM yyyy"
+                    }}
+
                   </strong>
+
                 </div>
 
+
                 <div>
-                  <p>Items</p>
+
+                  <p>
+                    Items
+                  </p>
 
                   <strong>
+
                     {{ order.items.length }}
-                    Item{{ order.items.length === 1 ? "" : "s" }}
+
+                    Item{{
+                      order.items.length === 1
+                        ? ""
+                        : "s"
+                    }}
+
                   </strong>
+
                 </div>
+
 
                 <div>
-                  <p>Total</p>
 
-                  <strong> ₹{{ order.totalAmount }} </strong>
+                  <p>
+                    Total
+                  </p>
+
+                  <strong>
+                    ₹{{ order.totalAmount }}
+                  </strong>
+
                 </div>
+
               </div>
-              <a [routerLink]="['/order', order.id]" class="view-order-button">
+
+
+              <a
+                [routerLink]="['/order', order.id]"
+                class="view-order-button">
+
                 View Order
+
               </a>
+
             </div>
+
           }
+
         </div>
+
       }
+
     }
+
   }
+
 </div>

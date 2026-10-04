@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import {
@@ -15,59 +16,97 @@ import {
   clearCart
 } from '../../store/cart/cart.actions';
 
+import { HeaderComponent } from '../../shared/components/header/header/header.component';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [
+    AsyncPipe,
+    HeaderComponent
+  ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
 
   private store = inject(Store);
+  private router = inject(Router);
+
+  readonly MAX_CART_QUANTITY = 5;
+
+  cartItems$ =
+    this.store.select(selectCartItems);
+
+  totalAmount$ =
+    this.store.select(selectCartTotalAmount);
+
+  isCartEmpty$ =
+    this.store.select(selectIsCartEmpty);
 
 
-  cartItems$ = this.store.select(selectCartItems);
+  increaseQuantity(
+    productId: string,
+    currentQuantity: number,
+    stock: number
+  ): void {
 
-  totalAmount$ = this.store.select(selectCartTotalAmount);
+    const maximumQuantity =
+      this.getMaximumQuantity(stock);
 
-  isCartEmpty$ = this.store.select(selectIsCartEmpty);
-
-
-  
-
-  increaseQuantity(productId: number): void {
+    if (currentQuantity >= maximumQuantity) {
+      return;
+    }
 
     this.store.dispatch(
-      increaseQuantity({ productId })
+      increaseQuantity({
+        productId
+      })
     );
-
   }
 
 
-  decreaseQuantity(productId: number): void {
+  decreaseQuantity(productId: string): void {
 
     this.store.dispatch(
-      decreaseQuantity({ productId })
+      decreaseQuantity({
+        productId
+      })
     );
-
   }
 
 
-  removeProduct(productId: number): void {
+  removeProduct(productId: string): void {
 
     this.store.dispatch(
-      removeFromCart({ productId })
+      removeFromCart({
+        productId
+      })
     );
-
   }
 
 
   clearCart(): void {
 
-    this.store.dispatch(clearCart());
+    this.store.dispatch(
+      clearCart()
+    );
+  }
 
+
+  proceedToCheckout(): void {
+
+    this.router.navigate(['/checkout']);
+
+  }
+
+
+  getMaximumQuantity(stock: number): number {
+
+    return Math.min(
+      this.MAX_CART_QUANTITY,
+      stock
+    );
   }
 
 }

@@ -1,0 +1,1378 @@
+/* =====================================================
+   ZELL COLLECTION — ACCOUNT PAGE
+
+   Theme:
+   Cream       #F7F4EC
+   Soft Beige  #E8E1D2
+   Sage Green  #7D8B74
+   Gold        #B8955A
+   Dark        #292A25
+===================================================== */
+
+
+/* =====================================================
+   ACCOUNT PAGE
+===================================================== */
+
+.account-page {
+  min-height: 100vh;
+  background: #F7F4EC;
+  color: #292A25;
+  padding: 55px 20px 80px;
+}
+
+.account-container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+
+/* =====================================================
+   ACCOUNT HEADER
+===================================================== */
+
+.account-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.account-header p {
+  margin: 0 0 10px;
+  color: #B8955A;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.account-header h1 {
+  margin: 0;
+  color: #292A25;
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.account-header span {
+  display: block;
+  margin-top: 12px;
+  color: #7D8B74;
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   COMMON SECTION
+===================================================== */
+
+.profile-section,
+.address-section,
+.orders-section,
+.account-actions {
+  margin-bottom: 60px;
+}
+
+.section-heading {
+  margin-bottom: 25px;
+}
+
+.section-heading p {
+  margin: 0 0 8px;
+  color: #B8955A;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: #292A25;
+  font-size: 27px;
+  font-weight: 600;
+}
+
+.section-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #7D8B74;
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-section {
+  padding: 32px;
+  background: #E8E1D2;
+  border: 1px solid rgba(125, 139, 116, 0.25);
+}
+
+.profile-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.profile-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  background: #F7F4EC;
+  border: 1px solid rgba(125, 139, 116, 0.20);
+}
+
+.profile-item .label {
+  color: #7D8B74;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.profile-item .value {
+  color: #292A25;
+  font-size: 15px;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+
+/* =====================================================
+   ADDRESS SECTION
+===================================================== */
+
+.address-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+
+/* =====================================================
+   ADD ADDRESS BUTTON
+===================================================== */
+
+.add-address-button {
+  border: 1px solid #7D8B74;
+  background: #7D8B74;
+  color: #F7F4EC;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.add-address-button:hover {
+  background: #B8955A;
+  border-color: #B8955A;
+  color: #292A25;
+  transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   SUCCESS / ERROR
+===================================================== */
+
+.address-success,
+.address-error,
+.form-error {
+  padding: 13px 16px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.address-success {
+  background: rgba(125, 139, 116, 0.15);
+  border-left: 3px solid #7D8B74;
+  color: #52604B;
+}
+
+.address-error,
+.form-error {
+  background: rgba(184, 149, 90, 0.12);
+  border-left: 3px solid #B8955A;
+  color: #725C32;
+}
+
+
+/* =====================================================
+   ADDRESS GRID
+===================================================== */
+
+.address-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.address-card {
+  padding: 26px;
+  background: #E8E1D2;
+  border: 1px solid rgba(125, 139, 116, 0.25);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.address-card:hover {
+  transform: translateY(-3px);
+  border-color: #7D8B74;
+  box-shadow: 0 12px 28px rgba(125, 139, 116, 0.14);
+}
+
+.address-card.default-address {
+  border-color: #B8955A;
+}
+
+
+/* =====================================================
+   ADDRESS TOP
+===================================================== */
+
+.address-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.address-card-top h3 {
+  margin: 0;
+  color: #292A25;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   DEFAULT BADGE
+===================================================== */
+
+.default-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 9px;
+  background: #B8955A;
+  color: #292A25;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   ADDRESS DETAILS
+===================================================== */
+
+.address-details {
+  margin-top: 20px;
+}
+
+.address-details p {
+  margin: 0 0 7px;
+  color: #5F665A;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   ADDRESS ACTIONS
+===================================================== */
+
+.address-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(125, 139, 116, 0.18);
+}
+
+.address-action {
+  border: 1px solid rgba(125, 139, 116, 0.35);
+  background: #F7F4EC;
+  color: #292A25;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.address-action:hover {
+  background: #7D8B74;
+  border-color: #7D8B74;
+  color: #F7F4EC;
+}
+
+.delete-action:hover {
+  background: #B8955A;
+  border-color: #B8955A;
+  color: #292A25;
+}
+
+.default-action:hover {
+  background: #7D8B74;
+  border-color: #7D8B74;
+  color: #F7F4EC;
+}
+
+.current-default {
+  color: #7D8B74;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   EMPTY ADDRESS
+===================================================== */
+
+.empty-address {
+  padding: 60px 25px;
+  background: #E8E1D2;
+  border: 1px solid rgba(125, 139, 116, 0.22);
+  text-align: center;
+}
+
+.empty-address-icon {
+  margin-bottom: 15px;
+  color: #B8955A;
+  font-size: 36px;
+}
+
+.empty-address h3 {
+  margin: 0 0 8px;
+  color: #292A25;
+  font-size: 20px;
+}
+
+.empty-address p {
+  margin: 0 0 22px;
+  color: #7D8B74;
+  font-size: 14px;
+}
+
+.address-limit {
+  margin-top: 15px;
+  color: #7D8B74;
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   ADDRESS FORM
+===================================================== */
+
+.address-form {
+  padding: 32px;
+  background: #E8E1D2;
+  border: 1px solid rgba(125, 139, 116, 0.25);
+}
+
+.form-heading {
+  margin-bottom: 28px;
+}
+
+.form-heading p {
+  margin: 0 0 7px;
+  color: #B8955A;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.form-heading h3 {
+  margin: 0;
+  color: #292A25;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  color: #292A25;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(125, 139, 116, 0.30);
+  background: #F7F4EC;
+  color: #292A25;
+  padding: 12px 13px;
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: #92988B;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: #7D8B74;
+  box-shadow:
+    0 0 0 3px rgba(125, 139, 116, 0.12);
+}
+
+
+/* =====================================================
+   DEFAULT CHECKBOX
+===================================================== */
+
+.default-checkbox {
+  margin-top: 3px;
+}
+
+.default-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #5F665A;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.default-checkbox input {
+  accent-color: #7D8B74;
+}
+
+
+/* =====================================================
+   FORM ACTIONS
+===================================================== */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.cancel-button,
+.save-button {
+  padding: 12px 22px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-button {
+  border: 1px solid #7D8B74;
+  background: #F7F4EC;
+  color: #292A25;
+}
+
+.cancel-button:hover {
+  background: #7D8B74;
+  color: #F7F4EC;
+}
+
+.save-button {
+  border: 1px solid #7D8B74;
+  background: #7D8B74;
+  color: #F7F4EC;
+}
+
+.save-button:hover {
+  background: #B8955A;
+  border-color: #B8955A;
+  color: #292A25;
+}
+
+
+/* =====================================================
+   MY ORDERS
+===================================================== */
+
+.orders-section {
+  width: 100%;
+}
+
+
+/* =====================================================
+   LOADING / ERROR / EMPTY
+===================================================== */
+
+.orders-loading,
+.orders-error,
+.empty-orders {
+  padding: 60px 25px;
+  background: #E8E1D2;
+  border: 1px solid rgba(125, 139, 116, 0.22);
+  text-align: center;
+}
+
+.orders-loading p,
+.orders-error p,
+.empty-orders p {
+  margin: 0;
+  color: #7D8B74;
+  font-size: 14px;
+}
+
+.orders-error p {
+  color: #8A6840;
+}
+
+
+/* =====================================================
+   EMPTY ORDERS
+===================================================== */
+
+.empty-orders-icon {
+  margin-bottom: 15px;
+  color: #B8955A;
+  font-size: 36px;
+}
+
+.empty-orders h3 {
+  margin: 0 0 8px;
+  color: #292A25;
+  font-size: 21px;
+}
+
+
+/* =====================================================
+   CONTINUE SHOPPING
+===================================================== */
+
+.shop-now-button {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 12px 23px;
+  background: #7D8B74;
+  border: 1px solid #7D8B74;
+  color: #F7F4EC;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.shop-now-button:hover {
+  background: #B8955A;
+  border-color: #B8955A;
+  color: #292A25;
+  transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   ORDERS LIST
+===================================================== */
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+
+/* =====================================================
+   ORDER CARD
+===================================================== */
+
+.order-card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px;
+  background: #E8E1D2;
+  border: 1px solid rgba(125, 139, 116, 0.25);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(184, 149, 90, 0.55);
+  box-shadow:
+    0 14px 32px rgba(125, 139, 116, 0.13);
+}
+
+
+/* =====================================================
+   ORDER HEADER
+===================================================== */
+
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(125, 139, 116, 0.18);
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.order-label {
+  color: #B8955A;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.order-info h3 {
+  margin: 0;
+  color: #292A25;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   ORDER STATUS
+===================================================== */
+
+.order-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 85px;
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: rgba(125, 139, 116, 0.16);
+  color: #5D6957;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.status-success {
+  background: rgba(125, 139, 116, 0.25);
+  color: #52604B;
+}
+
+.status-cancelled {
+  background: rgba(184, 149, 90, 0.20);
+  color: #765F32;
+}
+
+.status-delivered {
+  background: rgba(125, 139, 116, 0.30);
+  color: #52604B;
+}
+
+
+/* =====================================================
+   ORDER DETAILS
+===================================================== */
+
+.order-details {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(125, 139, 116, 0.18);
+}
+
+.order-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.detail-label {
+  color: #7D8B74;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.detail-value {
+  color: #292A25;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.order-total {
+  color: #B8955A;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   ORDER ITEMS
+===================================================== */
+
+.order-items {
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(125, 139, 116, 0.18);
+}
+
+.order-items h4 {
+  margin: 0 0 17px;
+  color: #292A25;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.order-item {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(125, 139, 116, 0.12);
+}
+
+.order-item:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.order-item:last-child {
+  padding-bottom: 0;
+}
+
+
+/* =====================================================
+   PRODUCT IMAGE
+===================================================== */
+
+.order-item-image {
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  background: #F7F4EC;
+  border: 1px solid rgba(125, 139, 116, 0.20);
+}
+
+.order-item-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+
+/* =====================================================
+   PRODUCT INFO
+===================================================== */
+
+.order-item-info {
+  min-width: 0;
+}
+
+.order-item-info h5 {
+  margin: 0 0 5px;
+  color: #292A25;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.order-item-info p {
+  margin: 0 0 5px;
+  color: #7D8B74;
+  font-size: 12px;
+}
+
+.order-item-info span {
+  color: #7D8B74;
+  font-size: 11px;
+}
+
+
+/* =====================================================
+   PRODUCT PRICE
+===================================================== */
+
+.order-item-price {
+  color: #B8955A;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   DELIVERY ADDRESS
+===================================================== */
+
+.order-address {
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(125, 139, 116, 0.18);
+}
+
+.order-address .detail-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.order-address p {
+  margin: 0;
+  color: #5F665A;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   ORDER ACTIONS
+===================================================== */
+
+.order-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 20px;
+}
+
+.cancel-order-button {
+  border: 1px solid #B8955A;
+  background: transparent;
+  color: #765F32;
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.cancel-order-button:hover {
+  background: #B8955A;
+  border-color: #B8955A;
+  color: #292A25;
+}
+
+.cancelled-message {
+  color: #765F32;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.delivered-message {
+  color: #52604B;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   QUICK ACCESS
+===================================================== */
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.account-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 25px;
+  background: #E8E1D2;
+  border: 1px solid rgba(125, 139, 116, 0.25);
+  color: #292A25;
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.account-card:hover {
+  transform: translateY(-3px);
+  border-color: #B8955A;
+  box-shadow:
+    0 12px 28px rgba(125, 139, 116, 0.13);
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: #7D8B74;
+  color: #F7F4EC;
+  font-size: 22px;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.card-content h3 {
+  margin: 0 0 5px;
+  color: #292A25;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.card-content p {
+  margin: 0;
+  color: #7D8B74;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.arrow {
+  color: #B8955A;
+  font-size: 22px;
+  transition: transform 0.2s ease;
+}
+
+.account-card:hover .arrow {
+  transform: translateX(4px);
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+.logout-section {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.logout-button {
+  min-width: 140px;
+  padding: 12px 25px;
+  border: 1px solid #B8955A;
+  background: transparent;
+  color: #765F32;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.logout-button:hover {
+  background: #B8955A;
+  border-color: #B8955A;
+  color: #292A25;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.loading p {
+  color: #7D8B74;
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   DELETE ADDRESS CONFIRMATION MODAL
+===================================================== */
+
+.delete-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(41, 42, 37, 0.48);
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  animation: modalOverlayIn 0.2s ease;
+}
+
+.delete-modal {
+  width: 100%;
+  max-width: 430px;
+  box-sizing: border-box;
+
+  padding: 38px 35px;
+
+  background: #F7F4EC;
+  border: 1px solid rgba(184, 149, 90, 0.45);
+
+  box-shadow:
+    0 24px 60px rgba(41, 42, 37, 0.22);
+
+  text-align: center;
+
+  animation: modalIn 0.25s ease;
+}
+
+.modal-brand {
+  margin: 0 0 12px;
+
+  color: #B8955A;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.delete-modal h2 {
+  margin: 0 0 14px;
+
+  color: #292A25;
+
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.modal-message {
+  max-width: 350px;
+
+  margin: 0 auto 30px;
+
+  color: #7D8B74;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   DELETE MODAL ACTIONS
+===================================================== */
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.cancel-delete-button,
+.confirm-delete-button {
+  flex: 1;
+
+  min-height: 45px;
+
+  padding: 12px 15px;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.cancel-delete-button {
+  border: 1px solid #7D8B74;
+  background: transparent;
+  color: #292A25;
+}
+
+.cancel-delete-button:hover {
+  background: #E8E1D2;
+  border-color: #7D8B74;
+  transform: translateY(-1px);
+}
+
+.confirm-delete-button {
+  border: 1px solid #B8955A;
+  background: #B8955A;
+  color: #292A25;
+}
+
+.confirm-delete-button:hover {
+  background: #292A25;
+  border-color: #292A25;
+  color: #F7F4EC;
+  transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   MODAL ANIMATIONS
+===================================================== */
+
+@keyframes modalOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .account-page {
+    padding: 45px 18px 65px;
+  }
+
+  .profile-details {
+    grid-template-columns: 1fr;
+  }
+
+  .order-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .account-page {
+    padding: 35px 14px 55px;
+  }
+
+  .account-header {
+    margin-bottom: 45px;
+  }
+
+  .account-header h1 {
+    font-size: 32px;
+  }
+
+  .account-header span {
+    font-size: 13px;
+  }
+
+  .profile-section,
+  .address-form,
+  .order-card {
+    padding: 20px;
+  }
+
+  .address-heading {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .address-heading .add-address-button {
+    width: 100%;
+  }
+
+  .address-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-button,
+  .save-button {
+    width: 100%;
+  }
+
+  .order-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .order-status {
+    align-self: flex-start;
+  }
+
+  .order-details {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .order-item {
+    grid-template-columns: 60px minmax(0, 1fr);
+  }
+
+  .order-item-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .order-item-price {
+    grid-column: 2;
+  }
+
+  .order-actions {
+    justify-content: stretch;
+  }
+
+  .cancel-order-button {
+    width: 100%;
+  }
+
+  .action-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  /* DELETE MODAL */
+
+  .delete-modal {
+    max-width: 100%;
+    padding: 30px 22px;
+  }
+
+  .delete-modal h2 {
+    font-size: 22px;
+  }
+
+  .modal-message {
+    font-size: 13px;
+    margin-bottom: 25px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .cancel-delete-button,
+  .confirm-delete-button {
+    width: 100%;
+  }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .account-page {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .account-header h1 {
+    font-size: 28px;
+  }
+
+  .section-heading h2 {
+    font-size: 23px;
+  }
+
+  .order-details {
+    grid-template-columns: 1fr;
+  }
+
+  .order-item {
+    grid-template-columns: 55px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .order-item-image {
+    width: 55px;
+    height: 55px;
+  }
+
+  /* DELETE MODAL */
+
+  .delete-modal {
+    padding: 27px 18px;
+  }
+
+  .delete-modal h2 {
+    font-size: 20px;
+  }
+
+  .modal-brand {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+}

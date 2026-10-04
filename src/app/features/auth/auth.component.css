@@ -1,181 +1,195 @@
-/* =========================
+:host {
+  display: block;
+
+  --cream: #F7F4EC;
+  --beige: #E8E1D2;
+  --sage: #7D8B74;
+  --gold: #B8955A;
+  --dark: #292A25;
+}
+
+
+/* =========================================================
    AUTH PAGE
-========================= */
+========================================================= */
 
 .auth-page {
   min-height: 100vh;
 
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   padding: 40px 20px;
 
-  box-sizing: border-box;
-
-  background: #F7F4EC;
+  background: var(--cream);
 }
 
 
-/* =========================
-   CREAM INNER BOX
-========================= */
+/* =========================================================
+   AUTH CARD
+========================================================= */
 
 .auth-card {
   width: 100%;
-  max-width: 430px;
+  max-width: 460px;
 
   padding: 42px;
 
-  box-sizing: border-box;
+  background: var(--beige);
 
-  background: #FFFDF7;
+  border: 1px solid rgba(184, 149, 90, 0.45);
 
-  border: 1px solid #e2cfa5;
-
-  border-radius: 16px;
+  border-radius: 18px;
 
   box-shadow:
-    0 12px 35px rgba(41, 42, 37, 0.08);
+    0 18px 45px rgba(41, 42, 37, 0.10);
 }
 
 
-/* =========================
-   ZELL COLLECTION
-========================= */
+/* =========================================================
+   HEADER
+========================================================= */
 
-.brand {
-  width: 100%;
-  margin-bottom: 24px;
+.auth-header {
+  margin-bottom: 28px;
 
   text-align: center;
 }
 
-.brand p {
+.auth-brand {
+  margin: 0 0 8px;
+
+  color: var(--gold);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.auth-header h1 {
+  margin: 0 0 10px;
+
+  color: var(--dark);
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 34px;
+  font-weight: 500;
+}
+
+.auth-header > p:last-child {
   margin: 0;
 
-  color: #B8955A;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  letter-spacing: 3px;
-
-  text-align: center;
-}
-
-
-/* =========================
-   HEADING
-========================= */
-
-.auth-card h2 {
-  margin: 0;
-
-  color: #292A25;
-
-  font-size: 28px;
-  font-weight: 600;
-
-  text-align: center;
-}
-
-.subtitle {
-  margin: 8px 0 30px;
-
-  color: #7D8B74;
+  color: rgba(41, 42, 37, 0.68);
 
   font-size: 14px;
 
-  text-align: center;
+  line-height: 1.6;
 }
 
 
-/* =========================
+/* =========================================================
+   SUCCESS / ERROR MESSAGES
+========================================================= */
+
+.success-message,
+.error-message {
+  margin-bottom: 18px;
+
+  padding: 12px 14px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+.success-message {
+  background: rgba(125, 139, 116, 0.16);
+
+  border: 1px solid rgba(125, 139, 116, 0.45);
+
+  color: var(--dark);
+}
+
+.error-message {
+  background: rgba(184, 149, 90, 0.12);
+
+  border: 1px solid rgba(184, 149, 90, 0.45);
+
+  color: var(--dark);
+}
+
+
+/* =========================================================
    FORM
-========================= */
+========================================================= */
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 19px;
 }
 
 .form-group label {
   display: block;
 
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 
-  color: #292A25;
+  color: var(--dark);
 
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
 }
-
-
-/* =========================
-   INPUT
-========================= */
 
 .form-group input {
   width: 100%;
-  height: 46px;
-
-  padding: 0 14px;
 
   box-sizing: border-box;
 
-  border: 1px solid #D9D5CA;
-  border-radius: 8px;
+  padding: 13px 14px;
+
+  background: var(--cream);
+
+  border: 1px solid rgba(41, 42, 37, 0.18);
+
+  border-radius: 9px;
+
+  color: var(--dark);
+
+  font-family: inherit;
+
+  font-size: 14px;
 
   outline: none;
 
-  background: #FFFFFF;
-
-  color: #292A25;
-
-  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .form-group input::placeholder {
-  color: #AAA89F;
+  color: rgba(41, 42, 37, 0.45);
 }
 
 .form-group input:focus {
-  border-color: #7D8B74;
+  border-color: var(--gold);
 
   box-shadow:
-    0 0 0 3px rgba(125, 139, 116, 0.12);
-}
-.auth-inner-box h2 {
-  color: #292A25;
-}
-
-.auth-inner-box .subtitle {
-  color: #7D8B74;
-}
-
-.auth-inner-box label {
-  color: #292A25;
-}
-
-.switch-text {
-  color: #7D8B74;
-}
-
-.switch-button {
-  color: #B8955A;
+    0 0 0 3px rgba(184, 149, 90, 0.12);
 }
 
 
-/* =========================
+/* =========================================================
    PASSWORD
-========================= */
+========================================================= */
 
-.password-field {
+.password-wrapper {
   position: relative;
-  width: 100%;
 }
 
-.password-field input {
+.password-wrapper input {
   padding-right: 70px;
 }
 
@@ -183,166 +197,330 @@
   position: absolute;
 
   top: 50%;
-  right: 12px;
+  right: 10px;
 
   transform: translateY(-50%);
 
-  border: none;
-
-  background: transparent;
-
-  color: #7D8B74;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
-.password-toggle:hover {
-  color: #B8955A;
-}
-
-
-/* =========================
-   ERROR
-========================= */
-
-.error-message {
-  margin: 7px 0 0;
-
-  color: #B8955A;
-
-  font-size: 12px;
-
-  line-height: 1.5;
-}
-
-.form-message {
-  margin-bottom: 15px;
-
-  text-align: center;
-}
-
-
-/* =========================
-   PASSWORD ERROR BOX
-========================= */
-
-.password-error {
-  margin-top: 8px;
-
-  padding: 11px 13px;
-
-  background: #F7F4EC;
-
-  border-left: 3px solid #B8955A;
-
-  border-radius: 6px;
-}
-
-.password-error p {
-  margin: 0 0 6px;
-
-  color: #292A25;
-
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.password-error ul {
-  margin: 0;
-  padding-left: 18px;
-}
-
-.password-error li {
-  margin-bottom: 3px;
-
-  color: #7D8B74;
-
-  font-size: 12px;
-}
-
-
-/* =========================
-   SUCCESS
-========================= */
-
-.success-message {
-  margin: 0 0 15px;
-
-  padding: 11px 13px;
-
-  background: #E8E1D2;
-
-  border-radius: 6px;
-
-  color: #7D8B74;
-
-  font-size: 13px;
-
-  text-align: center;
-}
-
-
-/* =========================
-   SUBMIT BUTTON
-========================= */
-
-.submit-button {
-  width: 100%;
-  height: 48px;
-
-  margin-top: 5px;
-
-  border: none;
-  border-radius: 8px;
-
-  background: #7D8B74;
-
-  color: #FFFFFF;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
-.submit-button:hover {
-  background: #6F7D67;
-}
-
-.submit-button:disabled {
-  background: #D9D5CA;
-
-  color: #929087;
-
-  cursor: not-allowed;
-}
-
-
-/* =========================
-   SWITCH
-========================= */
-
-.switch-text {
-  margin: 22px 0 0;
-
-  color: #77786F;
-
-  font-size: 13px;
-
-  text-align: center;
-}
-
-.switch-button {
   padding: 0;
 
   border: none;
 
   background: transparent;
 
-  color: #B8955A;
+  color: var(--gold);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.password-toggle:hover {
+  color: var(--dark);
+}
+
+.password-info {
+  margin: 7px 0 0;
+
+  color: rgba(41, 42, 37, 0.58);
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FIELD ERROR
+========================================================= */
+
+.field-error {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--dark);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   OTP SECTION
+========================================================= */
+
+.otp-section {
+  margin-top: 8px;
+  margin-bottom: 22px;
+
+  padding: 20px;
+
+  background: rgba(247, 244, 236, 0.72);
+
+  border: 1px solid rgba(184, 149, 90, 0.42);
+
+  border-radius: 12px;
+}
+
+.otp-heading {
+  margin-bottom: 18px;
+}
+
+.otp-title {
+  margin: 0 0 5px;
+
+  color: var(--dark);
+
+  font-family: Georgia, 'Times New Roman', serif;
+
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.otp-description {
+  margin: 0;
+
+  color: rgba(41, 42, 37, 0.62);
+
+  font-size: 12px;
+}
+
+.otp-email {
+  margin: 4px 0 0;
+
+  color: var(--gold);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   OTP INPUT
+========================================================= */
+
+.otp-input-group {
+  margin-bottom: 14px;
+}
+
+.otp-input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 15px;
+
+  background: var(--cream);
+
+  border: 1px solid rgba(184, 149, 90, 0.55);
+
+  border-radius: 9px;
+
+  color: var(--dark);
+
+  font-size: 22px;
+  font-weight: 600;
+
+  letter-spacing: 8px;
+
+  text-align: center;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.otp-input::placeholder {
+  color: rgba(41, 42, 37, 0.35);
+
+  font-size: 13px;
+  font-weight: 400;
+
+  letter-spacing: 1px;
+}
+
+.otp-input:focus {
+  border-color: var(--gold);
+
+  box-shadow:
+    0 0 0 3px rgba(184, 149, 90, 0.13);
+}
+
+
+/* =========================================================
+   VERIFY OTP BUTTON
+========================================================= */
+
+.verify-button {
+  width: 100%;
+
+  padding: 13px;
+
+  background: var(--sage);
+
+  border: 1px solid var(--sage);
+
+  border-radius: 9px;
+
+  color: var(--cream);
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.verify-button:hover:not(:disabled) {
+  background: var(--dark);
+
+  transform: translateY(-1px);
+}
+
+.verify-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   RESEND OTP
+========================================================= */
+
+.resend-button {
+  display: block;
+
+  width: 100%;
+
+  margin-top: 10px;
+
+  padding: 10px;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--gold);
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.resend-button:hover:not(:disabled) {
+  color: var(--dark);
+
+  text-decoration: underline;
+}
+
+.resend-button:disabled {
+  color: rgba(41, 42, 37, 0.4);
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   OTP NOTE
+========================================================= */
+
+.otp-note {
+  margin: 10px 0 0;
+
+  color: rgba(41, 42, 37, 0.5);
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   MAIN AUTH BUTTON
+========================================================= */
+
+.auth-button {
+  width: 100%;
+
+  padding: 14px;
+
+  background: var(--sage);
+
+  border: 1px solid var(--sage);
+
+  border-radius: 9px;
+
+  color: var(--cream);
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.auth-button:hover:not(:disabled) {
+  background: var(--dark);
+
+  transform: translateY(-1px);
+}
+
+.auth-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   LOGIN / REGISTER SWITCH
+========================================================= */
+
+.auth-switch {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 25px;
+
+  color: rgba(41, 42, 37, 0.65);
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+.auth-switch button {
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--gold);
+
+  font-family: inherit;
 
   font-size: 13px;
   font-weight: 600;
@@ -350,33 +528,41 @@
   cursor: pointer;
 }
 
-.switch-button:hover {
-  color: #8F7040;
+.auth-switch button:hover {
+  color: var(--dark);
 
   text-decoration: underline;
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
 
   .auth-page {
     padding: 25px 15px;
   }
 
   .auth-card {
-    padding: 32px 24px;
+    padding: 30px 22px;
+
+    border-radius: 15px;
   }
 
-  .auth-card h2 {
-    font-size: 24px;
+  .auth-header h1 {
+    font-size: 29px;
   }
 
-  .form-group input {
-    height: 44px;
+  .otp-section {
+    padding: 17px;
+  }
+
+  .otp-input {
+    font-size: 20px;
+
+    letter-spacing: 6px;
   }
 
 }

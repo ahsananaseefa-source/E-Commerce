@@ -1,20 +1,87 @@
+<app-header></app-header>
+
 <div class="product-details-page">
+
+  <!-- =================================
+       LOGIN MESSAGE
+  ================================== -->
+
+  @if (loginMessage) {
+
+    <div class="login-message-overlay">
+
+      <div class="login-message">
+
+        <button
+          type="button"
+          class="login-message-close"
+          (click)="closeLoginMessage()"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+        <p class="login-message-label">
+          ZELL COLLECTION
+        </p>
+
+        <h3>
+          Login Required
+        </h3>
+
+        <p>
+          Please login to continue.
+        </p>
+
+        <div class="login-message-actions">
+
+          <button
+            type="button"
+            class="login-button"
+            (click)="goToLogin()"
+          >
+            Login
+          </button>
+
+          <button
+            type="button"
+            class="continue-button"
+            (click)="closeLoginMessage()"
+          >
+            Continue Shopping
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
 
   @if (product$ | async; as product) {
 
+    <!-- =================================
+         PRODUCT DETAILS
+    ================================== -->
+
     <div class="product-details-container">
 
-      <!-- Product Image -->
+      <!-- PRODUCT IMAGE -->
+
       <div class="product-image">
 
         <img
           [src]="product.image"
-          [alt]="product.name">
+          [alt]="product.name"
+        >
 
       </div>
 
 
-      <!-- Product Information -->
+      <!-- PRODUCT INFORMATION -->
+
       <div class="product-info">
 
         <p class="category">
@@ -37,102 +104,302 @@
           {{ product.description }}
         </p>
 
+
+        <!-- STOCK -->
+
         <p class="stock">
-          {{ product.stock }} available
-        </p>
 
+          @if (product.stock > 0) {
 
-        <!-- Quantity -->
-        <div class="quantity-section">
+            {{ product.stock }} available
 
-          <span class="quantity-label">
-            Quantity
-          </span>
+          } @else {
 
-          <div class="quantity-controls">
-
-            <button
-              type="button"
-              class="quantity-button"
-              (click)="decreaseQuantity()">
-
-              −
-
-            </button>
-
-            <span class="quantity-value">
-              {{ quantity }}
-            </span>
-
-            <button
-              type="button"
-              class="quantity-button"
-              (click)="increaseQuantity(product.stock)">
-
-              +
-
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- Actions -->
-        <div class="product-actions">
-
-          <button
-            type="button"
-            class="cart-button"
-            (click)="addProductToCart(product)">
-
-            Add to Cart
-
-          </button>
-
-
-          <button
-            type="button"
-            class="buy-button"
-            (click)="buyNow(product)">
-
-            Buy Now
-
-          </button>
-
-
-          @if (wishlistItems$ | async; as wishlistItems) {
-
-            @if (isInWishlist(product, wishlistItems)) {
-
-              <button
-                type="button"
-                class="wishlist-button active">
-
-                ♥ In Wishlist
-
-              </button>
-
-            } @else {
-
-              <button
-                type="button"
-                class="wishlist-button"
-                (click)="addProductToWishlist(product)">
-
-                ♡ Add to Wishlist
-
-              </button>
-
-            }
+            Out of stock
 
           }
 
-        </div>
+        </p>
+
+
+        @if (product.stock > 0) {
+
+          <!-- =================================
+               QUANTITY
+          ================================== -->
+
+          <div class="quantity-section">
+
+            <span class="quantity-label">
+              Quantity
+            </span>
+
+            <div class="quantity-controls">
+
+              <button
+                type="button"
+                class="quantity-button"
+                [disabled]="quantity <= 1"
+                (click)="decreaseQuantity()"
+              >
+                −
+              </button>
+
+
+              <span class="quantity-value">
+                {{ quantity }}
+              </span>
+
+
+              <button
+                type="button"
+                class="quantity-button"
+                [disabled]="
+                  quantity >=
+                  getMaximumQuantity(
+                    product.stock
+                  )
+                "
+                (click)="
+                  increaseQuantity(
+                    product.stock
+                  )
+                "
+              >
+                +
+              </button>
+
+            </div>
+
+
+            <!-- QUANTITY LIMIT MESSAGE -->
+
+            @if (
+              quantity >=
+              getMaximumQuantity(
+                product.stock
+              )
+            ) {
+
+              <p class="quantity-limit-message">
+
+                @if (
+                  product.stock <
+                  MAX_CART_QUANTITY
+                ) {
+
+                  Only
+                  {{ product.stock }}
+                  items available in stock.
+
+                } @else {
+
+                  Maximum
+                  {{ MAX_CART_QUANTITY }}
+                  items allowed for this product.
+
+                }
+
+              </p>
+
+            }
+
+          </div>
+
+
+          <!-- =================================
+               PRODUCT ACTIONS
+          ================================== -->
+
+          <div class="product-actions">
+
+
+            <!-- ADD TO CART -->
+
+            <button
+              type="button"
+              class="cart-button"
+              [disabled]="addedToCart"
+              (click)="
+                addProductToCart(product)
+              "
+            >
+              Add to Cart
+            </button>
+
+
+            <!-- BUY NOW -->
+
+            <button
+              type="button"
+              class="buy-button"
+              (click)="
+                buyNow(product)
+              "
+            >
+              Buy Now
+            </button>
+
+
+            <!-- WISHLIST -->
+
+            @if (
+              wishlistItems$ | async;
+              as wishlistItems
+            ) {
+
+              @if (
+                isInWishlist(
+                  product,
+                  wishlistItems
+                )
+              ) {
+
+                <button
+                  type="button"
+                  class="wishlist-button active"
+                  (click)="
+                    toggleWishlist(
+                      product,
+                      wishlistItems
+                    )
+                  "
+                >
+                  ♥ In Wishlist
+                </button>
+
+              } @else {
+
+                <button
+                  type="button"
+                  class="wishlist-button"
+                  (click)="
+                    toggleWishlist(
+                      product,
+                      wishlistItems
+                    )
+                  "
+                >
+                  ♡ Add to Wishlist
+                </button>
+
+              }
+
+            }
+
+          </div>
+
+        } @else {
+
+          <p class="out-of-stock-message">
+            This product is currently out of stock.
+          </p>
+
+        }
 
       </div>
 
     </div>
+
+
+    <!-- =================================
+         SIMILAR PRODUCTS
+    ================================== -->
+
+    @if (
+      similarProducts$ | async;
+      as similarProducts
+    ) {
+
+      @if (
+        similarProducts.length > 0
+      ) {
+
+        <section class="similar-products">
+
+          <div class="similar-products-header">
+
+            <p>
+              ZELL COLLECTION
+            </p>
+
+            <h2>
+              You May Also Like
+            </h2>
+
+            <span>
+              Explore more
+              {{ product.category }}
+              jewellery.
+            </span>
+
+          </div>
+
+
+          <div class="similar-products-grid">
+
+            @for (
+              similarProduct of similarProducts;
+              track similarProduct.id
+            ) {
+
+              <article
+                class="similar-product-card"
+                [routerLink]="[
+                  '/products',
+                  similarProduct.id
+                ]"
+              >
+
+                <!-- IMAGE -->
+
+                <div class="similar-product-image">
+
+                  <img
+                    [src]="similarProduct.image"
+                    [alt]="similarProduct.name"
+                  >
+
+                </div>
+
+
+                <!-- INFO -->
+
+                <div class="similar-product-info">
+
+                  <p class="similar-product-category">
+                    {{ similarProduct.category }}
+                  </p>
+
+                  <h3>
+                    {{ similarProduct.name }}
+                  </h3>
+
+                  <div class="similar-product-bottom">
+
+                    <strong>
+                      ₹{{ similarProduct.price }}
+                    </strong>
+
+                    <span>
+                      ★ {{ similarProduct.rating }}
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+            }
+
+          </div>
+
+        </section>
+
+      }
+
+    }
 
   } @else {
 
@@ -143,3 +410,5 @@
   }
 
 </div>
+
+<app-footer></app-footer>

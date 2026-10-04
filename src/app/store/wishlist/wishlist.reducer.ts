@@ -1,23 +1,24 @@
- import { createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import {
   initialWishlistState
 } from './wishlist.state';
 
 import {
-  addToWishlist,
   removeFromWishlist,
   clearWishlist,
   loadWishlistSuccess
 } from './wishlist.actions';
-
 
 export const wishlistReducer = createReducer(
 
   initialWishlistState,
 
 
-  // Load wishlist from db.json
+  // =========================
+  // LOAD WISHLIST SUCCESS
+  // =========================
+
   on(
     loadWishlistSuccess,
     (state, { items }) => ({
@@ -27,41 +28,10 @@ export const wishlistReducer = createReducer(
   ),
 
 
-  // Add product to wishlist
-  on(
-    addToWishlist,
-    (state, { product }) => {
+  // =========================
+  // REMOVE FROM WISHLIST
+  // =========================
 
-      const alreadyExists =
-        state.items.some(
-          item => item.productId === product.id
-        );
-
-      if (alreadyExists) {
-        return state;
-      }
-
-      const newItem = {
-        productId: product.id,
-        userId: Number(
-          localStorage.getItem('userId')
-        ),
-        addedAt: new Date().toISOString()
-      };
-
-      return {
-        ...state,
-        items: [
-          ...state.items,
-          newItem
-        ]
-      };
-
-    }
-  ),
-
-
-  // Remove product from wishlist
   on(
     removeFromWishlist,
     (state, { productId }) => {
@@ -80,7 +50,10 @@ export const wishlistReducer = createReducer(
   ),
 
 
-  // Clear wishlist
+  // =========================
+  // CLEAR WISHLIST
+  // =========================
+
   on(
     clearWishlist,
     state => ({

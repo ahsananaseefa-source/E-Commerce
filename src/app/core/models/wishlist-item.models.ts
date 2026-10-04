@@ -1,6 +1,6 @@
 export interface WishlistItem {
-  id?: number;
-  userId: number;
-  productId: number;
+  id?: string;
+  userId: string;
+  productId: string;
   addedAt: string;
 }

@@ -1,8 +1,6 @@
-<div class="wishlist-page">
+<app-header></app-header>
 
-  <!-- =========================
-       HEADER
-  ========================= -->
+<div class="wishlist-page">
 
   <div class="wishlist-header">
 
@@ -13,7 +11,8 @@
     @if (wishlistCount$ | async; as count) {
 
       <span>
-        {{ count }} item{{ count === 1 ? "" : "s" }}
+        {{ count }}
+        item{{ count === 1 ? "" : "s" }}
       </span>
 
     }
@@ -21,15 +20,13 @@
   </div>
 
 
-  <!-- =========================
-       EMPTY WISHLIST
-  ========================= -->
-
   @if (isWishlistEmpty$ | async) {
 
     <div class="empty-wishlist">
 
-      <h2>Your wishlist is empty</h2>
+      <h2>
+        Your wishlist is empty
+      </h2>
 
       <p>
         Save your favourite jewellery here.
@@ -37,15 +34,12 @@
 
     </div>
 
-  }
+  } @else {
 
-  @else {
-
-    <!-- =========================
-         WISHLIST PRODUCTS
-    ========================= -->
-
-    @if (wishlistDisplayItems$ | async; as wishlistItems) {
+    @if (
+      wishlistDisplayItems$ | async;
+      as wishlistItems
+    ) {
 
       <div class="wishlist-grid">
 
@@ -54,21 +48,27 @@
           track item.productId
         ) {
 
-          <div class="wishlist-card">
+          <article
+            class="wishlist-card"
+            [routerLink]="[
+              '/products',
+              item.product.id
+            ]"
+          >
 
-            <!-- PRODUCT IMAGE -->
+            <!-- Product Image -->
 
             <div class="wishlist-image">
 
               <img
                 [src]="item.product.image"
                 [alt]="item.product.name"
-              />
+              >
 
             </div>
 
 
-            <!-- PRODUCT DETAILS -->
+            <!-- Product Details -->
 
             <div class="wishlist-details">
 
@@ -76,11 +76,9 @@
                 {{ item.product.category }}
               </p>
 
-
               <h2>
                 {{ item.product.name }}
               </h2>
-
 
               <p class="description">
                 {{ item.product.description }}
@@ -93,7 +91,6 @@
                   ₹{{ item.product.price }}
                 </span>
 
-
                 <span class="rating">
                   ★ {{ item.product.rating }}
                 </span>
@@ -105,7 +102,8 @@
 
                 @if (item.product.stock > 0) {
 
-                  {{ item.product.stock }} available
+                  {{ item.product.stock }}
+                  available
 
                 } @else {
 
@@ -124,10 +122,15 @@
               </p>
 
 
+              <!-- Remove Button -->
+
               <button
                 type="button"
                 class="remove-button"
-                (click)="removeProduct(item.productId)"
+                (click)="
+                  $event.stopPropagation();
+                  removeProduct(item.productId)
+                "
               >
 
                 Remove from Wishlist
@@ -136,16 +139,12 @@
 
             </div>
 
-          </div>
+          </article>
 
         }
 
       </div>
 
-
-      <!-- =========================
-           CLEAR WISHLIST
-      ========================= -->
 
       <button
         type="button"
@@ -162,3 +161,4 @@
   }
 
 </div>
+

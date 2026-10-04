@@ -1,8 +1,9 @@
 <header class="header">
 
-  <!-- =================================
+
+  <!-- =====================================================
        MOBILE MENU BUTTON
-  ================================== -->
+  ====================================================== -->
 
   <button
     type="button"
@@ -17,15 +18,16 @@
   </button>
 
 
-  <!-- =================================
+
+  <!-- =====================================================
        LOGO
-  ================================== -->
+  ====================================================== -->
 
   <div class="logo">
 
     <a
       routerLink="/home"
-      (click)="closeMobileMenu()">
+      (click)="closeAllMenus()">
 
       ZELL
 
@@ -34,28 +36,39 @@
   </div>
 
 
-  <!-- =================================
+
+  <!-- =====================================================
        DESKTOP NAVIGATION
-  ================================== -->
+  ====================================================== -->
 
   <nav class="navigation">
 
+
+    <!-- HOME -->
+
     <a
-      routerLink="/home">
+      routerLink="/home"
+      (click)="closeAllMenus()">
 
       Home
 
     </a>
 
+
+    <!-- SHOP -->
+
     <a
-      routerLink="/products">
+      routerLink="/products"
+      (click)="closeAllMenus()">
 
       Shop
 
     </a>
 
 
-    <!-- CATEGORY -->
+    <!-- ===================================================
+         CATEGORY
+    ==================================================== -->
 
     <div class="category-wrapper">
 
@@ -83,59 +96,21 @@
 
         <div class="category-menu">
 
-          <a
-            routerLink="/products"
-            [queryParams]="{ category: 'Rings' }"
-            (click)="closeCategoryMenu()">
+          @for (
+            category of categories;
+            track category
+          ) {
 
-            Rings
+            <button
+              type="button"
+              class="category-menu-item"
+              (click)="selectCategory(category)">
 
-          </a>
+              {{ category }}
 
-          <a
-            routerLink="/products"
-            [queryParams]="{ category: 'Earrings' }"
-            (click)="closeCategoryMenu()">
+            </button>
 
-            Earrings
-
-          </a>
-
-          <a
-            routerLink="/products"
-            [queryParams]="{ category: 'Bracelets' }"
-            (click)="closeCategoryMenu()">
-
-            Bracelets
-
-          </a>
-
-          <a
-            routerLink="/products"
-            [queryParams]="{ category: 'Bangles' }"
-            (click)="closeCategoryMenu()">
-
-            Bangles
-
-          </a>
-
-          <a
-            routerLink="/products"
-            [queryParams]="{ category: 'Chains' }"
-            (click)="closeCategoryMenu()">
-
-            Chains
-
-          </a>
-
-          <a
-            routerLink="/products"
-            [queryParams]="{ category: 'Anklets' }"
-            (click)="closeCategoryMenu()">
-
-            Anklets
-
-          </a>
+          }
 
         </div>
 
@@ -146,9 +121,10 @@
   </nav>
 
 
-  <!-- =================================
+
+  <!-- =====================================================
        HEADER ACTIONS
-  ================================== -->
+  ====================================================== -->
 
   <div class="header-actions">
 
@@ -160,8 +136,9 @@
       <input
         #searchInput
         type="text"
-        placeholder="Search jewellery..."
+        placeholder="Search"
         (keyup.enter)="searchProduct(searchInput.value)">
+
 
       <button
         type="button"
@@ -188,7 +165,10 @@
     </div>
 
 
-    <!-- WISHLIST -->
+
+    <!-- ===================================================
+         WISHLIST
+    ==================================================== -->
 
     <a
       routerLink="/wishlist"
@@ -225,33 +205,143 @@
     </a>
 
 
-    <!-- ACCOUNT -->
 
-    <a
-      routerLink="/auth"
-      class="header-icon"
-      aria-label="Account">
+    <!-- ===================================================
+         ACCOUNT / PROFILE
+    ==================================================== -->
 
-      <svg viewBox="0 0 24 24">
+    <div class="profile-wrapper">
 
-        <circle
-          cx="12"
-          cy="8"
-          r="4">
-        </circle>
+      <button
+        type="button"
+        class="header-icon profile-button"
+        aria-label="Account"
+        aria-haspopup="true"
+        [attr.aria-expanded]="showProfileMenu"
+        (click)="toggleProfileMenu()">
 
-        <path
-          d="M4 21
-             C4 16.8 7.4 14 12 14
-             C16.6 14 20 16.8 20 21">
-        </path>
+        <svg viewBox="0 0 24 24">
 
-      </svg>
+          <circle
+            cx="12"
+            cy="8"
+            r="4">
+          </circle>
 
-    </a>
+          <path
+            d="M4 21
+               C4 16.8 7.4 14 12 14
+               C16.6 14 20 16.8 20 21">
+          </path>
+
+        </svg>
+
+      </button>
 
 
-    <!-- ORDERS -->
+      <!-- PROFILE DROPDOWN -->
+
+      @if (showProfileMenu) {
+
+        <div class="profile-menu">
+
+
+          <!-- GUEST -->
+
+          @if (!isLoggedIn) {
+
+            <div class="profile-menu-header">
+
+              <span class="profile-menu-label">
+                ZELL COLLECTION
+              </span>
+
+              <h3>
+                Welcome
+              </h3>
+
+              <p>
+                Sign in to access your account
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="profile-menu-button primary"
+              (click)="goToLogin()">
+
+              Login
+
+            </button>
+
+
+            <button
+              type="button"
+              class="profile-menu-button secondary"
+              (click)="goToRegister()">
+
+              Create Account
+
+            </button>
+
+          }
+
+
+          <!-- LOGGED IN -->
+
+          @if (isLoggedIn) {
+
+            <div class="profile-menu-header">
+
+              <span class="profile-menu-label">
+                ZELL COLLECTION
+              </span>
+
+              <h3>
+                My Account
+              </h3>
+
+              <p>
+                Manage your profile and orders
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="profile-menu-button primary"
+              (click)="goToAccount()">
+
+              My Account
+
+            </button>
+
+
+            <button
+              type="button"
+              class="profile-menu-button secondary logout-button"
+              (click)="logout()">
+
+              Logout
+
+            </button>
+
+          }
+
+        </div>
+
+      }
+
+    </div>
+
+
+
+    <!-- ===================================================
+         ORDERS
+    ==================================================== -->
 
     <a
       routerLink="/order"
@@ -274,7 +364,10 @@
     </a>
 
 
-    <!-- CART -->
+
+    <!-- ===================================================
+         CART
+    ==================================================== -->
 
     <a
       routerLink="/cart"
@@ -306,13 +399,17 @@
       </svg>
 
 
-      @if (cartItemCount$ | async; as count) {
+      @if (isLoggedIn) {
 
-        @if (count > 0) {
+        @if (cartItemCount$ | async; as count) {
 
-          <span class="item-count">
-            {{ count }}
-          </span>
+          @if (count > 0) {
+
+            <span class="item-count">
+              {{ count }}
+            </span>
+
+          }
 
         }
 
@@ -323,13 +420,17 @@
   </div>
 
 
-  <!-- =================================
+
+  <!-- =====================================================
        MOBILE NAVIGATION
-  ================================== -->
+  ====================================================== -->
 
   @if (showMobileMenu) {
 
     <div class="mobile-menu">
+
+
+      <!-- HOME -->
 
       <a
         routerLink="/home"
@@ -338,6 +439,9 @@
         Home
 
       </a>
+
+
+      <!-- SHOP -->
 
       <a
         routerLink="/products"
@@ -348,65 +452,88 @@
       </a>
 
 
+      <!-- =================================================
+           MOBILE CATEGORIES
+      ================================================== -->
+
       <div class="mobile-category">
 
         <span>
           Categories
         </span>
 
-        <a
-          routerLink="/products"
-          [queryParams]="{ category: 'Rings' }"
-          (click)="closeMobileMenu()">
 
-          Rings
+        @for (
+          category of categories;
+          track category
+        ) {
 
-        </a>
+          <button
+            type="button"
+            (click)="selectCategory(category)">
 
-        <a
-          routerLink="/products"
-          [queryParams]="{ category: 'Earrings' }"
-          (click)="closeMobileMenu()">
+            {{ category }}
 
-          Earrings
+          </button>
 
-        </a>
+        }
 
-        <a
-          routerLink="/products"
-          [queryParams]="{ category: 'Bracelets' }"
-          (click)="closeMobileMenu()">
+      </div>
 
-          Bracelets
 
-        </a>
+      <!-- =================================================
+           MOBILE ACCOUNT
+      ================================================== -->
 
-        <a
-          routerLink="/products"
-          [queryParams]="{ category: 'Bangles' }"
-          (click)="closeMobileMenu()">
+      <div class="mobile-profile-section">
 
-          Bangles
+        <span class="mobile-profile-title">
+          Account
+        </span>
 
-        </a>
 
-        <a
-          routerLink="/products"
-          [queryParams]="{ category: 'Chains' }"
-          (click)="closeMobileMenu()">
+        @if (!isLoggedIn) {
 
-          Chains
+          <button
+            type="button"
+            (click)="goToLogin()">
 
-        </a>
+            Login
 
-        <a
-          routerLink="/products"
-          [queryParams]="{ category: 'Anklets' }"
-          (click)="closeMobileMenu()">
+          </button>
 
-          Anklets
 
-        </a>
+          <button
+            type="button"
+            (click)="goToRegister()">
+
+            Create Account
+
+          </button>
+
+        }
+
+
+        @if (isLoggedIn) {
+
+          <button
+            type="button"
+            (click)="goToAccount()">
+
+            My Account
+
+          </button>
+
+
+          <button
+            type="button"
+            (click)="logout()">
+
+            Logout
+
+          </button>
+
+        }
 
       </div>
 

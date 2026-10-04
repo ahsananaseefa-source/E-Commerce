@@ -1,8 +1,8 @@
-import { CartItem } from "./cart-item.model";;
+import { CartItem } from "./cart-item.model";
 
 export interface Order {
     id:number;
-    userId:number;
+    userId:string;
     items:CartItem[];
     totalAmount: number;
     shippingAddress:string;

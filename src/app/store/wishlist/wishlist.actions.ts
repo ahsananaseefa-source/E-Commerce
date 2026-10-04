@@ -12,7 +12,7 @@ export const addToWishlist = createAction(
 
 export const removeFromWishlist = createAction(
   '[Wishlist] Remove From Wishlist',
-  props<{ productId: number }>()
+  props<{ productId: string }>()
 );
 
 
@@ -21,12 +21,11 @@ export const clearWishlist = createAction(
 );
 
 
- 
 export const loadWishlist = createAction(
   '[Wishlist] Load Wishlist'
 );
 
- 
+
 export const loadWishlistSuccess = createAction(
   '[Wishlist] Load Wishlist Success',
   props<{ items: WishlistItem[] }>()

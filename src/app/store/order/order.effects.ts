@@ -12,9 +12,9 @@ import {
   switchMap,
   tap
 } from 'rxjs/operators';
-
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-
+import { clearCart } from '../cart/cart.actions';
 import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
@@ -45,7 +45,8 @@ export class OrderEffects {
   private http = inject(HttpClient);
 
   private router = inject(Router);
-
+  
+   private store = inject(Store)
   private apiUrl =
     'http://localhost:3000/order';
 
@@ -95,7 +96,7 @@ export class OrderEffects {
   );
 
 
-  // ORDER SUCCESS PAGE
+  // ORDER SUCCESS  + CLEAR CART
 
   orderSuccess$ = createEffect(
 
@@ -106,6 +107,9 @@ export class OrderEffects {
         ofType(createOrderSuccess),
 
         tap(() => {
+
+
+          this.store.dispatch(clearCart());
 
           this.router.navigate([
             '/order-success'
@@ -120,6 +124,8 @@ export class OrderEffects {
     }
 
   );
+
+
 
 
   // LOAD ORDERS

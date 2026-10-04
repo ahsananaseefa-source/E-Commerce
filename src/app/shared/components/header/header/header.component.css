@@ -1,4 +1,10 @@
+/* =====================================================
+   HEADER
+===================================================== */
+
 .header {
+  position: relative;
+
   height: 78px;
   padding: 0 60px;
 
@@ -8,12 +14,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  z-index: 1000;
 }
 
 
-/* =========================
+/* =====================================================
    LOGO
-========================= */
+===================================================== */
 
 .logo {
   flex: 1;
@@ -21,46 +29,201 @@
 
 .logo a {
   color: #B8955A;
+
   text-decoration: none;
 
   font-size: 28px;
   font-weight: 600;
+
   letter-spacing: 5px;
+
+  transition: color 0.3s ease;
+}
+
+.logo a:hover {
+  color: #7D8B74;
 }
 
 
-/* =========================
-   NAVIGATION
-========================= */
+/* =====================================================
+   DESKTOP NAVIGATION
+===================================================== */
 
 .navigation {
+  flex: 2;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
   gap: 32px;
-
-  flex: 2;
 }
 
-.navigation a {
+.navigation > a {
   color: #292A25;
+
   text-decoration: none;
 
   font-size: 14px;
+  font-weight: 400;
+
   white-space: nowrap;
 
   transition: color 0.3s ease;
 }
 
-.navigation a:hover {
+.navigation > a:hover {
   color: #B8955A;
 }
 
 
-/* =========================
+/* =====================================================
+   CATEGORY
+===================================================== */
+
+.category-wrapper {
+  position: relative;
+}
+
+.category-button {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #292A25;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition: color 0.3s ease;
+}
+
+.category-button:hover {
+  color: #B8955A;
+}
+
+.category-arrow {
+  display: inline-block;
+
+  font-size: 11px;
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
+}
+
+.category-arrow.open {
+  transform: rotate(180deg);
+
+  color: #B8955A;
+}
+
+
+/* =====================================================
+   CATEGORY DROPDOWN
+===================================================== */
+
+.category-menu {
+  position: absolute;
+
+  top: calc(100% + 20px);
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 180px;
+
+  padding: 8px;
+
+  background-color: #F7F4EC;
+
+  border: 1px solid #E8E1D2;
+  border-radius: 10px;
+
+  box-shadow:
+    0 10px 25px rgba(41, 42, 37, 0.12);
+
+  z-index: 2000;
+
+  animation: categoryMenuOpen 0.2s ease;
+}
+
+@keyframes categoryMenuOpen {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(-50%)
+      translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(-50%)
+      translateY(0);
+  }
+
+}
+
+
+/* =====================================================
+   CATEGORY DROPDOWN BUTTONS
+===================================================== */
+
+.category-menu-item {
+  display: block;
+
+  width: 100%;
+
+  padding: 11px 13px;
+
+  border: none;
+
+  background-color: transparent;
+
+  color: #292A25;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  text-align: left;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    padding-left 0.25s ease;
+}
+
+.category-menu-item:hover {
+  background-color: #E8E1D2;
+
+  color: #B8955A;
+
+  padding-left: 17px;
+}
+
+
+/* =====================================================
    HEADER ACTIONS
-========================= */
+===================================================== */
 
 .header-actions {
   flex: 1;
@@ -73,9 +236,9 @@
 }
 
 
-/* =========================
+/* =====================================================
    SEARCH
-========================= */
+===================================================== */
 
 .search-box {
   width: 180px;
@@ -91,12 +254,16 @@
   width: 100%;
   height: 100%;
 
+  padding: 0;
+
   border: none;
   outline: none;
 
   background: transparent;
 
   color: #292A25;
+
+  font-family: inherit;
   font-size: 13px;
 }
 
@@ -105,7 +272,9 @@
 }
 
 
-/* SEARCH ICON */
+/* =====================================================
+   SEARCH BUTTON
+===================================================== */
 
 .search-icon {
   width: 22px;
@@ -123,6 +292,14 @@
   color: #292A25;
 
   cursor: pointer;
+
+  flex-shrink: 0;
+
+  transition: color 0.3s ease;
+}
+
+.search-icon:hover {
+  color: #B8955A;
 }
 
 .search-icon svg {
@@ -130,7 +307,9 @@
   height: 20px;
 
   fill: none;
+
   stroke: currentColor;
+
   stroke-width: 1.7;
 
   stroke-linecap: round;
@@ -138,11 +317,13 @@
 }
 
 
-/* =========================
+/* =====================================================
    HEADER ICONS
-========================= */
+===================================================== */
 
 .header-icon {
+  position: relative;
+
   width: 22px;
   height: 22px;
 
@@ -154,7 +335,11 @@
 
   text-decoration: none;
 
-  transition: color 0.3s ease;
+  flex-shrink: 0;
+
+  transition:
+    color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .header-icon svg {
@@ -162,21 +347,312 @@
   height: 22px;
 
   fill: none;
+
   stroke: currentColor;
+
   stroke-width: 1.6;
 
   stroke-linecap: round;
   stroke-linejoin: round;
+
+  transition: stroke 0.3s ease;
 }
 
 .header-icon:hover {
   color: #B8955A;
+
+  transform: translateY(-1px);
 }
 
 
-/* =========================
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-wrapper {
+  position: relative;
+}
+
+.profile-button {
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+
+  font: inherit;
+}
+
+.profile-button:hover {
+  color: #B8955A;
+}
+
+
+/* =====================================================
+   PROFILE DROPDOWN
+===================================================== */
+
+.profile-menu {
+  position: absolute;
+
+  top: calc(100% + 20px);
+  right: -10px;
+
+  width: 255px;
+
+  padding: 20px;
+
+  background-color: #F7F4EC;
+
+  border: 1px solid #B8955A;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 15px 35px rgba(41, 42, 37, 0.16);
+
+  z-index: 3000;
+
+  animation: profileMenuOpen 0.2s ease;
+}
+
+@keyframes profileMenuOpen {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(-7px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =====================================================
+   PROFILE MENU HEADER
+===================================================== */
+
+.profile-menu-header {
+  padding-bottom: 17px;
+
+  margin-bottom: 16px;
+
+  border-bottom: 1px solid #E8E1D2;
+
+  text-align: center;
+}
+
+.profile-menu-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #B8955A;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.profile-menu-header h3 {
+  margin: 0 0 6px;
+
+  color: #292A25;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.profile-menu-header p {
+  margin: 0;
+
+  color: #7D8B74;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   PROFILE MENU BUTTONS
+===================================================== */
+
+.profile-menu-button {
+  width: 100%;
+
+  min-height: 42px;
+
+  margin-bottom: 9px;
+
+  border-radius: 7px;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.profile-menu-button:last-child {
+  margin-bottom: 0;
+}
+
+
+/* PRIMARY */
+
+.profile-menu-button.primary {
+  background-color: #7D8B74;
+
+  border: 1px solid #7D8B74;
+
+  color: #F7F4EC;
+}
+
+.profile-menu-button.primary:hover {
+  background-color: #B8955A;
+
+  border-color: #B8955A;
+}
+
+
+/* SECONDARY */
+
+.profile-menu-button.secondary {
+  background-color: #E8E1D2;
+
+  border: 1px solid #7D8B74;
+
+  color: #292A25;
+}
+
+.profile-menu-button.secondary:hover {
+  background-color: #7D8B74;
+
+  border-color: #7D8B74;
+
+  color: #F7F4EC;
+}
+
+
+/* LOGOUT */
+
+.profile-menu-button.logout-button:hover {
+  background-color: #B8955A;
+
+  border-color: #B8955A;
+
+  color: #F7F4EC;
+}
+
+
+/* =====================================================
+   ITEM COUNT BADGE
+===================================================== */
+
+.item-count {
+  position: absolute;
+
+  top: -8px;
+  right: -9px;
+
+  min-width: 16px;
+  height: 16px;
+
+  padding: 0 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #B8955A;
+
+  color: #F7F4EC;
+
+  border-radius: 50%;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  line-height: 1;
+}
+
+
+/* =====================================================
+   MOBILE MENU BUTTON
+===================================================== */
+
+.mobile-menu-button {
+  display: none;
+
+  width: 24px;
+  height: 24px;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 5px;
+
+  cursor: pointer;
+}
+
+.mobile-menu-button span {
+  display: block;
+
+  width: 22px;
+  height: 1.5px;
+
+  background-color: #292A25;
+
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.mobile-menu-button:hover span {
+  background-color: #B8955A;
+}
+
+
+/* =====================================================
+   MOBILE NAVIGATION
+===================================================== */
+
+.mobile-menu {
+  display: none;
+}
+
+
+/* =====================================================
+   MOBILE PROFILE
+===================================================== */
+
+.mobile-profile-section {
+  display: none;
+}
+
+
+/* =====================================================
    TABLET
-========================= */
+===================================================== */
 
 @media (max-width: 1100px) {
 
@@ -188,6 +664,10 @@
     gap: 20px;
   }
 
+  .header-actions {
+    gap: 15px;
+  }
+
   .search-box {
     width: 140px;
   }
@@ -195,34 +675,351 @@
 }
 
 
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media (max-width: 750px) {
 
   .header {
-    height: auto;
-    padding: 20px 25px;
+    height: 68px;
 
-    flex-direction: column;
-    gap: 20px;
+    padding: 0 20px;
+
+    flex-direction: row;
+
+    justify-content: space-between;
   }
+
+
+  /* MOBILE MENU BUTTON */
+
+  .mobile-menu-button {
+    display: flex;
+  }
+
+
+  /* LOGO */
 
   .logo {
     flex: none;
+
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
   }
+
+  .logo a {
+    font-size: 23px;
+
+    letter-spacing: 4px;
+  }
+
+
+  /* DESKTOP NAVIGATION */
 
   .navigation {
-    flex: none;
-
-    flex-wrap: wrap;
-    gap: 15px 20px;
+    display: none;
   }
+
+
+  /* HEADER ACTIONS */
 
   .header-actions {
     flex: none;
-    justify-content: center;
+
+    margin-left: auto;
+
+    gap: 14px;
+  }
+
+
+  /* SEARCH */
+
+  .search-box {
+    width: 22px;
+
+    border-bottom: none;
+  }
+
+  .search-box input {
+    display: none;
+  }
+
+
+  /* SEARCH ICON */
+
+  .search-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+
+  /* ACCOUNT */
+
+  .profile-wrapper {
+    display: none;
+  }
+
+
+  /* ORDERS */
+
+  .header-actions .header-icon:nth-of-type(3) {
+    display: none;
+  }
+
+
+  /* =================================================
+     MOBILE MENU
+  ================================================= */
+
+  .mobile-menu {
+    position: absolute;
+
+    top: 68px;
+
+    left: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+
+    background-color: #F7F4EC;
+
+    border-bottom: 1px solid #E8E1D2;
+
+    box-shadow:
+      0 10px 25px rgba(41, 42, 37, 0.08);
+
+    z-index: 1500;
+
+    animation: mobileMenuOpen 0.2s ease;
+  }
+
+
+  @keyframes mobileMenuOpen {
+
+    from {
+      opacity: 0;
+
+      transform:
+        translateY(-8px);
+    }
+
+    to {
+      opacity: 1;
+
+      transform:
+        translateY(0);
+    }
+
+  }
+
+
+  /* =================================================
+     MOBILE MAIN LINKS
+  ================================================= */
+
+  .mobile-menu > a {
+
+    padding: 12px 10px;
+
+    color: #292A25;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    border-radius: 7px;
+
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .mobile-menu > a:hover {
+
+    background-color: #E8E1D2;
+
+    color: #B8955A;
+  }
+
+
+  /* =================================================
+     MOBILE CATEGORY
+  ================================================= */
+
+  .mobile-category {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    margin-top: 10px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #E8E1D2;
+  }
+
+  .mobile-category > span {
+
+    margin-bottom: 6px;
+
+    padding: 0 10px;
+
+    color: #B8955A;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+  }
+
+
+  /* MOBILE CATEGORY BUTTONS */
+
+  .mobile-category button {
+
+    width: 100%;
+
+    padding: 9px 12px;
+
+    border: none;
+
+    background-color: transparent;
+
+    color: #292A25;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    text-align: left;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      padding-left 0.2s ease;
+  }
+
+  .mobile-category button:hover {
+
+    background-color: #E8E1D2;
+
+    color: #B8955A;
+
+    padding-left: 16px;
+  }
+
+
+  /* =================================================
+     MOBILE ACCOUNT SECTION
+  ================================================= */
+
+  .mobile-profile-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    margin-top: 14px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid #E8E1D2;
+  }
+
+  .mobile-profile-title {
+
+    padding: 0 10px 7px;
+
+    color: #B8955A;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+  }
+
+  .mobile-profile-section button {
+
+    width: 100%;
+
+    padding: 11px 12px;
+
+    border: 1px solid transparent;
+
+    border-radius: 7px;
+
+    background-color: transparent;
+
+    color: #292A25;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .mobile-profile-section button:hover {
+
+    background-color: #E8E1D2;
+
+    color: #B8955A;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+  .header {
+    padding: 0 15px;
+  }
+
+  .header-actions {
+    gap: 11px;
+  }
+
+  .logo a {
+    font-size: 21px;
+
+    letter-spacing: 3px;
+  }
+
+  .mobile-menu-button {
+    width: 22px;
+  }
+
+  .mobile-menu-button span {
+    width: 20px;
   }
 
 }

@@ -1,53 +1,105 @@
- <div class="auth-page">
+<div class="auth-page">
 
   <div class="auth-card">
 
-    <div class="brand">
-      <p>ZELL COLLECTION</p>
-    </div>
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-    <div class="auth-inner-box">
+    <div class="auth-header">
+
+      <p class="auth-brand">
+        ZELL COLLECTION
+      </p>
 
       @if (isLogin) {
 
-        <h2>Welcome Back</h2>
+        <h1>Welcome Back</h1>
 
-        <p class="subtitle">
-          Login to your account
+        <p>
+          Login to continue your jewellery journey.
         </p>
 
       } @else {
 
-        <h2>Create Account</h2>
+        <h1>Create Account</h1>
 
-        <p class="subtitle">
-          Create your ZELL account to get started
+        <p>
+          Join ZELL and discover timeless beauty.
         </p>
 
       }
 
+    </div>
 
-      <!-- NAME -->
+
+    <!-- =====================================================
+         SUCCESS MESSAGE
+    ====================================================== -->
+
+    @if (successMessage) {
+
+      <div class="success-message">
+        {{ successMessage }}
+      </div>
+
+    }
+
+
+    <!-- =====================================================
+         ERROR MESSAGE
+    ====================================================== -->
+
+    @if (errorMessage) {
+
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+
+    }
+
+
+    <!-- =====================================================
+         AUTH FORM
+    ====================================================== -->
+
+    <form
+      #authForm="ngForm"
+      (ngSubmit)="submitForm()"
+      novalidate
+    >
+
+
+      <!-- ===================================================
+           NAME - REGISTER ONLY
+      ==================================================== -->
 
       @if (!isLogin) {
 
         <div class="form-group">
 
-          <label>Name</label>
+          <label for="name">
+            Full Name
+          </label>
 
           <input
+            id="name"
             type="text"
             name="name"
             [(ngModel)]="name"
-            placeholder="Enter your name"
-          >
+            placeholder="Enter your full name"
+            autocomplete="name"
+            required
+          />
 
-          @if (name && !isNameValid()) {
+          @if (
+            authForm.submitted &&
+            !name.trim()
+          ) {
 
-            <p class="error-message">
-              Name must contain only letters and spaces and be
-              2–50 characters long.
-            </p>
+            <small class="field-error">
+              Name is required.
+            </small>
 
           }
 
@@ -56,23 +108,122 @@
       }
 
 
-      <!-- EMAIL -->
+      <!-- ===================================================
+           PHONE - REGISTER ONLY
+      ==================================================== -->
+
+      @if (!isLogin) {
+
+        <div class="form-group">
+
+          <label for="phone">
+            Phone Number
+          </label>
+
+          <input
+            id="phone"
+            type="tel"
+            name="phone"
+            [(ngModel)]="phone"
+            maxlength="10"
+            inputmode="numeric"
+            placeholder="Enter 10-digit phone number"
+            autocomplete="tel"
+            required
+          />
+
+          @if (
+            authForm.submitted &&
+            !phone.trim()
+          ) {
+
+            <small class="field-error">
+              Phone number is required.
+            </small>
+
+          }
+
+        </div>
+
+      }
+
+
+      <!-- ===================================================
+           EMAIL
+      ==================================================== -->
 
       <div class="form-group">
 
-        <label>Email</label>
+        <label for="email">
+          Email Address
+        </label>
 
         <input
+          id="email"
           type="email"
           name="email"
           [(ngModel)]="email"
           placeholder="Enter your email"
-        >
+          autocomplete="email"
+          required
+        />
 
-        @if (email && !isEmailValid()) {
+      </div>
 
-          <p class="error-message">
-            Please enter a valid email address.
+
+      <!-- ===================================================
+           PASSWORD
+      ==================================================== -->
+
+      <div class="form-group">
+
+        <label for="password">
+          Password
+        </label>
+
+        <div class="password-wrapper">
+
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            name="password"
+            [(ngModel)]="password"
+            placeholder="Enter your password"
+            [autocomplete]="
+              isLogin
+                ? 'current-password'
+                : 'new-password'
+            "
+            required
+          />
+
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="togglePassword()"
+            [attr.aria-label]="
+              showPassword
+                ? 'Hide password'
+                : 'Show password'
+            "
+          >
+
+            {{ showPassword ? 'Hide' : 'Show' }}
+
+          </button>
+
+        </div>
+
+
+        <!-- PASSWORD REQUIREMENTS - REGISTER ONLY -->
+
+        @if (!isLogin) {
+
+          <p class="password-info">
+
+            Password must contain at least 8 characters,
+            uppercase, lowercase, number and special character.
+
           </p>
 
         }
@@ -80,120 +231,213 @@
       </div>
 
 
-      <!-- PASSWORD -->
+      <!-- =====================================================
+           OTP SECTION - REGISTER ONLY
+      ====================================================== -->
 
-      <div class="form-group">
+      @if (!isLogin && otpSent && !otpVerified) {
 
-        <label>Password</label>
+        <div class="otp-section">
 
-        <div class="password-field">
+          <div class="otp-heading">
 
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            name="password"
-            [(ngModel)]="password"
-            placeholder="Enter your password"
-          >
+            <div>
 
-          <button
-            type="button"
-            class="password-toggle"
-            (click)="togglePassword()"
-          >
-            {{ showPassword ? 'Hide' : 'Show' }}
-          </button>
+              <p class="otp-title">
+                Verify Your Email
+              </p>
 
-        </div>
+              <p class="otp-description">
+                Enter the 6-digit OTP sent to
+              </p>
 
+              <p class="otp-email">
+                {{ email }}
+              </p>
 
-        @if (password && !isPasswordValid()) {
-
-          <div class="password-error">
-
-            <p>Password must contain:</p>
-
-            <ul>
-              <li>At least 8 characters</li>
-              <li>One uppercase letter</li>
-              <li>One lowercase letter</li>
-              <li>One number</li>
-              <li>One special character</li>
-            </ul>
+            </div>
 
           </div>
 
-        }
 
-      </div>
+          <!-- =================================================
+               OTP INPUT
+          ================================================== -->
+
+          <div class="form-group otp-input-group">
+
+            <label for="otp">
+              One-Time Password
+            </label>
+
+            <input
+              id="otp"
+              type="text"
+              name="otp"
+              [(ngModel)]="otp"
+              maxlength="6"
+              minlength="6"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              placeholder="Enter 6-digit OTP"
+              class="otp-input"
+            />
+
+          </div>
 
 
-      <!-- ERROR -->
+          <!-- =================================================
+               VERIFY BUTTON
+          ================================================== -->
 
-      @if (errorMessage) {
+          <button
+            type="button"
+            class="verify-button"
+            (click)="verifyOtp()"
+            [disabled]="otpVerifying"
+          >
 
-        <p class="error-message form-message">
-          {{ errorMessage }}
-        </p>
+            @if (otpVerifying) {
+
+              Verifying...
+
+            } @else {
+
+              Verify OTP
+
+            }
+
+          </button>
+
+
+          <!-- =================================================
+               RESEND BUTTON
+          ================================================== -->
+
+          <button
+            type="button"
+            class="resend-button"
+            (click)="resendOtp()"
+            [disabled]="
+              !resendAvailable ||
+              otpSending
+            "
+          >
+
+            @if (otpSending) {
+
+              Sending...
+
+            } @else if (resendAvailable) {
+
+              Resend OTP
+
+            } @else {
+
+              Resend OTP in {{ resendSeconds }} seconds
+
+            }
+
+          </button>
+
+
+          <!-- =================================================
+               OTP NOTE
+          ================================================== -->
+
+          <p class="otp-note">
+            The OTP is valid for 5 minutes.
+          </p>
+
+        </div>
 
       }
 
 
-      <!-- SUCCESS -->
-
-      @if (successMessage) {
-
-        <p class="success-message">
-          {{ successMessage }}
-        </p>
-
-      }
-
-
-      <!-- SUBMIT -->
-
-      <button
-        type="button"
-        class="submit-button"
-        (click)="submitForm()"
-        [disabled]="!isFormValid()"
-      >
-        {{ isLogin ? "Login" : "Create Account" }}
-      </button>
-
-
-      <!-- SWITCH -->
+      <!-- =====================================================
+           MAIN BUTTON
+      ====================================================== -->
 
       @if (isLogin) {
 
-        <p class="switch-text">
+        <!-- LOGIN BUTTON -->
 
-          Don't have an account?
+        <button
+          type="submit"
+          class="auth-button"
+        >
 
-          <button
-            type="button"
-            class="switch-button"
-            (click)="switchMode()"
-          >
-            Create Account
-          </button>
+          Login
 
-        </p>
+        </button>
 
       } @else {
 
-        <p class="switch-text">
+        <!-- REGISTER / SEND OTP BUTTON -->
 
-          Already have an account?
+        @if (!otpSent) {
 
           <button
-            type="button"
-            class="switch-button"
-            (click)="switchMode()"
+            type="submit"
+            class="auth-button"
+            [disabled]="otpSending"
           >
-            Login
+
+            @if (otpSending) {
+
+              Sending OTP...
+
+            } @else {
+
+              Send OTP
+
+            }
+
           </button>
 
-        </p>
+        }
+
+      }
+
+
+    </form>
+
+
+    <!-- =====================================================
+         SWITCH LOGIN / REGISTER
+    ====================================================== -->
+
+    <div class="auth-switch">
+
+      @if (isLogin) {
+
+        <span>
+          Don't have an account?
+        </span>
+
+        <button
+          type="button"
+          (click)="switchMode()"
+        >
+
+          Create Account
+
+        </button>
+
+      } @else {
+
+        <span>
+          Already have an account?
+        </span>
+
+        <button
+          type="button"
+          (click)="switchMode()"
+        >
+
+          Login
+
+        </button>
 
       }
 

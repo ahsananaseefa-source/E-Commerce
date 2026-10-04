@@ -17,7 +17,7 @@ import { OrderEffects } from './store/order/order.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes,withInMemoryScrolling({
-    anchorScrolling: 'enabled'
+    scrollPositionRestoration: 'top'
   })), provideHttpClient(), 
     provideStore({
       products : productReducer,

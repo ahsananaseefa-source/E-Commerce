@@ -3,9 +3,10 @@
 
 <div class="home">
 
-  <!-- =========================
+
+  <!-- =====================================================
        HERO SECTION
-  ========================= -->
+  ====================================================== -->
 
   <section class="hero">
 
@@ -37,7 +38,7 @@
     <div class="hero-image">
 
       <img
-        src="assets/images/hero-jewellery.jpg"
+        src="images/home.jpg"
         alt="ZELL Anti-Tarnish Jewellery">
 
     </div>
@@ -46,9 +47,9 @@
 
 
 
-  <!-- =========================
+  <!-- =====================================================
        CATEGORIES SECTION
-  ========================= -->
+  ====================================================== -->
 
   <section class="categories">
 
@@ -58,21 +59,33 @@
       Shop by Category
     </h2>
 
+
     <div class="category-list">
 
-      @for (category of categories; track category) {
+      @for (
+        category of categories;
+        track category
+      ) {
 
         <a
           class="category-card"
-          [routerLink]="['/products']"
-          [queryParams]="{ category: category }">
+
+          [routerLink]="[
+            '/products'
+          ]"
+
+          [queryParams]="{
+            category: category
+          }">
+
 
           <div class="category-image">
+
 
             @if (category === 'Rings') {
 
               <img
-                src="assets/images/categories/rings.jpg"
+                src="images/rings.jpg"
                 alt="Rings">
 
             }
@@ -80,7 +93,7 @@
             @else if (category === 'Earrings') {
 
               <img
-                src="assets/images/categories/earrings.jpg"
+                src="images/earrings.jpg"
                 alt="Earrings">
 
             }
@@ -88,7 +101,7 @@
             @else if (category === 'Bracelets') {
 
               <img
-                src="assets/images/categories/bracelets.jpg"
+                src="images/bracelet.jpg"
                 alt="Bracelets">
 
             }
@@ -96,7 +109,7 @@
             @else if (category === 'Bangles') {
 
               <img
-                src="assets/images/categories/bangles.jpg"
+                src="images/bangles.jpg"
                 alt="Bangles">
 
             }
@@ -104,7 +117,7 @@
             @else if (category === 'Chains') {
 
               <img
-                src="assets/images/categories/chains.jpg"
+                src="images/chain.jpg"
                 alt="Chains">
 
             }
@@ -112,12 +125,13 @@
             @else if (category === 'Anklets') {
 
               <img
-                src="assets/images/categories/anklets.jpg"
+                src="images/Anklet.jpg"
                 alt="Anklets">
 
             }
 
           </div>
+
 
           <h3>
             {{ category }}
@@ -133,52 +147,9 @@
 
 
 
-  <!-- =========================
-       ABOUT ZELL SECTION
-  ========================= -->
-
-  <section class="about-section">
-
-    <div class="about-content">
-
-      <p class="section-label">
-        ABOUT ZELL
-      </p>
-
-      <h2>
-        Jewellery Made for
-        Everyday Elegance
-      </h2>
-
-      <p class="about-text">
-        ZELL is an anti-tarnish jewellery brand created
-        for women who love simple, elegant and timeless
-        pieces.
-      </p>
-
-      <p class="about-text">
-        Our collection is designed to complement everyday
-        outfits while offering the beauty and confidence
-        you look for in jewellery.
-      </p>
-
-      <a
-        routerLink="/products"
-        class="about-button">
-
-        Explore Collection
-
-      </a>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =========================
+  <!-- =====================================================
        FEATURED PRODUCTS SECTION
-  ========================= -->
+  ====================================================== -->
 
   <section class="featured">
 
@@ -191,6 +162,10 @@
     </h2>
 
 
+    <!-- ===================================================
+         LOADING
+    ==================================================== -->
+
     @if (loading$ | async) {
 
       <p>
@@ -199,40 +174,81 @@
 
     }
 
+
+    <!-- ===================================================
+         ERROR
+    ==================================================== -->
+
+    @else if (error$ | async) {
+
+      <p>
+        Error loading products.
+      </p>
+
+    }
+
+
+    <!-- ===================================================
+         PRODUCTS
+    ==================================================== -->
+
     @else {
 
-      @if (error$ | async) {
+      @if (
+        products$ | async;
+        as products
+      ) {
 
-        <p>
-          Error loading products.
-        </p>
 
-      }
+        <!-- ===============================================
+             NO PRODUCTS
+        ================================================ -->
 
-      @else {
+        @if (products.length === 0) {
 
-        @if (products$ | async; as products) {
+          <p>
+            No products found.
+          </p>
 
-          @if (products.length === 0) {
+        }
 
-            <p>
-              No products found.
-            </p>
 
-          }
+        <!-- ===============================================
+             PRODUCTS AVAILABLE
+        ================================================ -->
 
-          @else {
+        @else {
+
+          @if (
+            wishlistItems$ | async;
+            as wishlistItems
+          ) {
 
             <div class="product-list">
 
+
               @for (
-                product of products.slice(0, 6);
+                product of products;
                 track product.id
               ) {
 
-                <div class="product-card">
 
-                  <!-- PRODUCT IMAGE -->
+                <!-- =======================================
+                     PRODUCT CARD
+                ======================================== -->
+
+                <a
+                  [routerLink]="[
+                    '/products',
+                    product.id
+                  ]"
+
+                  class="product-card">
+
+
+                  <!-- ===================================
+                       PRODUCT IMAGE
+                  ==================================== -->
 
                   <div class="product-image">
 
@@ -240,39 +256,110 @@
                       [src]="product.image"
                       [alt]="product.name">
 
+
+                    <!-- =================================
+                         WISHLIST BUTTON
+                    ================================== -->
+
+                    <button
+                      type="button"
+
+                      class="wishlist-icon"
+
+                      [class.active]="
+                        isInWishlist(
+                          product,
+                          wishlistItems
+                        )
+                      "
+
+                      (click)="
+                        $event.preventDefault();
+                        $event.stopPropagation();
+                        toggleWishlist(
+                          product,
+                          wishlistItems
+                        )
+                      "
+
+                      [attr.aria-label]="
+                        isInWishlist(
+                          product,
+                          wishlistItems
+                        )
+
+                          ? 'Remove from wishlist'
+
+                          : 'Add to wishlist'
+                      ">
+
+
+                      @if (
+                        isInWishlist(
+                          product,
+                          wishlistItems
+                        )
+                      ) {
+
+                        ♥
+
+                      }
+
+                      @else {
+
+                        ♡
+
+                      }
+
+                    </button>
+
                   </div>
 
 
-                  <!-- PRODUCT DETAILS -->
+                  <!-- ===================================
+                       PRODUCT DETAILS
+                  ==================================== -->
 
-                  <h3>
-                    {{ product.name }}
-                  </h3>
-
-                  <p>
-                    {{ product.category }}
-                  </p>
-
-                  <p>
-                    ₹{{ product.price }}
-                  </p>
-
-                  <p>
-                    ★ {{ product.rating }}
-                  </p>
+                  <div class="product-details">
 
 
-                  <!-- VIEW PRODUCT -->
+                    <div class="product-top">
 
-                  <a
-                    [routerLink]="['/products', product.id]"
-                    class="product-button">
 
-                    View Product
+                      <span class="product-category">
 
-                  </a>
+                        {{ product.category }}
 
-                </div>
+                      </span>
+
+
+                      <span class="product-rating">
+
+                        ★ {{ product.rating }}
+
+                      </span>
+
+
+                    </div>
+
+
+                    <h3>
+
+                      {{ product.name }}
+
+                    </h3>
+
+
+                    <p class="product-price">
+
+                      ₹{{ product.price }}
+
+                    </p>
+
+
+                  </div>
+
+                </a>
 
               }
 
@@ -292,8 +379,8 @@
 
 
 
-<!-- =========================
+<!-- =========================================================
      FOOTER
-========================= -->
+========================================================== -->
 
 <app-footer></app-footer>

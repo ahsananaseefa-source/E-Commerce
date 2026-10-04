@@ -1,0 +1,1036 @@
+<app-header></app-header>
+
+<div class="account-page">
+
+  <div class="account-container">
+
+    <!-- =========================
+         ACCOUNT HEADER
+    ========================= -->
+
+    <div class="account-header">
+
+      <p>ZELL COLLECTION</p>
+
+      <h1>My Account</h1>
+
+      <span>
+        Manage your account, addresses and orders
+      </span>
+
+    </div>
+
+
+    @if (user) {
+
+      <!-- =========================
+           PROFILE
+      ========================= -->
+
+      <section class="profile-section">
+
+        <div class="section-heading">
+
+          <p>ACCOUNT</p>
+
+          <h2>Profile Information</h2>
+
+        </div>
+
+
+        <div class="profile-details">
+
+          <div class="profile-item">
+
+            <span class="label">
+              Name
+            </span>
+
+            <span class="value">
+              {{ user.name }}
+            </span>
+
+          </div>
+
+
+          <div class="profile-item">
+
+            <span class="label">
+              Email
+            </span>
+
+            <span class="value">
+              {{ user.email }}
+            </span>
+
+          </div>
+
+
+          <div class="profile-item">
+
+            <span class="label">
+              Phone
+            </span>
+
+            <span class="value">
+              {{ user.phone || 'Not added' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =========================
+           SAVED ADDRESSES
+      ========================= -->
+
+      <section class="address-section">
+
+        <div class="address-heading">
+
+          <div class="section-heading">
+
+            <p>DELIVERY</p>
+
+            <h2>Saved Addresses</h2>
+
+          </div>
+
+
+          @if (addresses.length < 2 && !isAddressFormOpen) {
+
+            <button
+              type="button"
+              class="add-address-button"
+              (click)="openAddAddress()">
+
+              + Add Address
+
+            </button>
+
+          }
+
+        </div>
+
+
+
+        @if (addressSuccess) {
+
+          <div class="address-success">
+            {{ addressSuccess }}
+          </div>
+
+        }
+
+
+        @if (addressError) {
+
+          <div class="address-error">
+            {{ addressError }}
+          </div>
+
+        }
+
+
+
+        <!-- =========================
+             ADDRESS LIST
+        ========================= -->
+
+        @if (addresses.length > 0 && !isAddressFormOpen) {
+
+          <div class="address-grid">
+
+            @for (
+              address of addresses;
+              track address.id
+            ) {
+
+              <div
+                class="address-card"
+                [class.default-address]="address.isDefault">
+
+                <div class="address-card-top">
+
+                  <div>
+
+                    <h3>
+                      {{ address.fullName }}
+                    </h3>
+
+
+                    @if (address.isDefault) {
+
+                      <span class="default-badge">
+                        DEFAULT
+                      </span>
+
+                    }
+
+                  </div>
+
+                </div>
+
+
+
+                <div class="address-details">
+
+                  <p>
+                    {{ address.addressLine }}
+                  </p>
+
+                  <p>
+                    {{ address.city }},
+                    {{ address.state }}
+                    - {{ address.pincode }}
+                  </p>
+
+                  <p>
+                    Phone: {{ address.phone }}
+                  </p>
+
+                </div>
+
+
+
+                <!-- ADDRESS ACTIONS -->
+
+                <div class="address-actions">
+
+                  <button
+                    type="button"
+                    class="address-action"
+                    (click)="editAddress(address)">
+
+                    Edit
+
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="address-action delete-action"
+                    (click)="deleteAddress(address)">
+
+                    Delete
+
+                  </button>
+
+
+                  @if (!address.isDefault) {
+
+                    <button
+                      type="button"
+                      class="address-action default-action"
+                      (click)="setDefaultAddress(address)">
+
+                      Set as Default
+
+                    </button>
+
+                  }
+
+                  @else {
+
+                    <span class="current-default">
+                      ✓ Default Address
+                    </span>
+
+                  }
+
+                </div>
+
+              </div>
+
+            }
+
+          </div>
+
+        }
+
+
+
+        <!-- =========================
+             NO ADDRESS
+        ========================= -->
+
+        @if (
+          addresses.length === 0 &&
+          !isAddressFormOpen
+        ) {
+
+          <div class="empty-address">
+
+            <div class="empty-address-icon">
+              ⌖
+            </div>
+
+            <h3>
+              No saved addresses
+            </h3>
+
+            <p>
+              Add a delivery address for a faster checkout.
+            </p>
+
+
+            <button
+              type="button"
+              class="add-address-button"
+              (click)="openAddAddress()">
+
+              Add Your First Address
+
+            </button>
+
+          </div>
+
+        }
+
+
+
+        <!-- =========================
+             ADDRESS FORM
+        ========================= -->
+
+        @if (isAddressFormOpen) {
+
+          <div class="address-form">
+
+            <div class="form-heading">
+
+              <div>
+
+                <p>
+                  {{
+                    isEditingAddress
+                      ? 'UPDATE ADDRESS'
+                      : 'NEW ADDRESS'
+                  }}
+                </p>
+
+                <h3>
+                  {{
+                    isEditingAddress
+                      ? 'Edit Address'
+                      : 'Add New Address'
+                  }}
+                </h3>
+
+              </div>
+
+            </div>
+
+
+
+            <div class="form-grid">
+
+              <!-- FULL NAME -->
+
+              <div class="form-field">
+
+                <label for="fullName">
+                  Full Name
+                </label>
+
+                <input
+                  id="fullName"
+                  type="text"
+                  [(ngModel)]="addressForm.fullName"
+                  placeholder="Enter full name">
+
+              </div>
+
+
+
+              <!-- PHONE -->
+
+              <div class="form-field">
+
+                <label for="phone">
+                  Phone Number
+                </label>
+
+                <input
+                  id="phone"
+                  type="tel"
+                  maxlength="10"
+                  [(ngModel)]="addressForm.phone"
+                  placeholder="Enter 10-digit phone number">
+
+              </div>
+
+
+
+              <!-- ADDRESS -->
+
+              <div class="form-field full-width">
+
+                <label for="addressLine">
+                  Address
+                </label>
+
+                <textarea
+                  id="addressLine"
+                  rows="3"
+                  [(ngModel)]="addressForm.addressLine"
+                  placeholder="House / Flat / Street / Area">
+                </textarea>
+
+              </div>
+
+
+
+              <!-- CITY -->
+
+              <div class="form-field">
+
+                <label for="city">
+                  City
+                </label>
+
+                <input
+                  id="city"
+                  type="text"
+                  [(ngModel)]="addressForm.city"
+                  placeholder="Enter city">
+
+              </div>
+
+
+
+              <!-- STATE -->
+
+              <div class="form-field">
+
+                <label for="state">
+                  State
+                </label>
+
+                <input
+                  id="state"
+                  type="text"
+                  [(ngModel)]="addressForm.state"
+                  placeholder="Enter state">
+
+              </div>
+
+
+
+              <!-- PINCODE -->
+
+              <div class="form-field">
+
+                <label for="pincode">
+                  Pincode
+                </label>
+
+                <input
+                  id="pincode"
+                  type="text"
+                  maxlength="6"
+                  [(ngModel)]="addressForm.pincode"
+                  placeholder="Enter 6-digit pincode">
+
+              </div>
+
+
+
+              <!-- DEFAULT -->
+
+              <div class="default-checkbox full-width">
+
+                <label>
+
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="addressForm.isDefault">
+
+                  <span>
+                    Set this as my default address
+                  </span>
+
+                </label>
+
+              </div>
+
+            </div>
+
+
+
+            @if (addressError) {
+
+              <div class="form-error">
+                {{ addressError }}
+              </div>
+
+            }
+
+
+
+            <div class="form-actions">
+
+              <button
+                type="button"
+                class="cancel-button"
+                (click)="cancelAddressForm()">
+
+                Cancel
+
+              </button>
+
+
+              <button
+                type="button"
+                class="save-button"
+                (click)="saveAddress()">
+
+                {{
+                  isEditingAddress
+                    ? 'Update Address'
+                    : 'Save Address'
+                }}
+
+              </button>
+
+            </div>
+
+          </div>
+
+        }
+
+
+
+        <!-- =========================
+             ADDRESS LIMIT
+        ========================= -->
+
+        @if (
+          addresses.length >= 2 &&
+          !isAddressFormOpen
+        ) {
+
+          <p class="address-limit">
+            You can save up to 2 addresses.
+          </p>
+
+        }
+
+      </section>
+
+
+
+      <!-- =========================
+           MY ORDERS
+      ========================= -->
+
+      <section class="orders-section">
+
+        <div class="section-heading">
+
+          <p>ORDER HISTORY</p>
+
+          <h2>
+            My Orders
+          </h2>
+
+          <span>
+            View and manage your recent jewellery orders
+          </span>
+
+        </div>
+
+
+
+        <!-- LOADING -->
+
+        @if (orderLoading$ | async) {
+
+          <div class="orders-loading">
+
+            <p>
+              Loading your orders...
+            </p>
+
+          </div>
+
+        }
+
+
+
+        <!-- ERROR -->
+
+        @else if (orderError$ | async) {
+
+          <div class="orders-error">
+
+            <p>
+              Unable to load your orders.
+              Please try again.
+            </p>
+
+          </div>
+
+        }
+
+
+
+        <!-- EMPTY -->
+
+        @else if (userOrders.length === 0) {
+
+          <div class="empty-orders">
+
+            <div class="empty-orders-icon">
+              ◷
+            </div>
+
+            <h3>
+              No orders yet
+            </h3>
+
+            <p>
+              You haven't placed any orders yet.
+            </p>
+
+
+            <a
+              routerLink="/home"
+              class="shop-now-button">
+
+              Continue Shopping
+
+            </a>
+
+          </div>
+
+        }
+
+
+
+        <!-- ORDERS -->
+
+        @else {
+
+          <div class="orders-list">
+
+            @for (
+              order of userOrders;
+              track order.id
+            ) {
+
+              <article class="order-card">
+
+                <!-- ORDER HEADER -->
+
+                <div class="order-card-header">
+
+                  <div class="order-info">
+
+                    <span class="order-label">
+                      ORDER
+                    </span>
+
+                    <h3>
+                      #{{ order.id }}
+                    </h3>
+
+                  </div>
+
+
+                  <div
+                    class="order-status"
+                    [class.status-success]="order.status === 'Success'"
+                    [class.status-cancelled]="order.status === 'Cancelled'"
+                    [class.status-delivered]="order.status === 'Delivered'">
+
+                    {{ order.status }}
+
+                  </div>
+
+                </div>
+
+
+
+                <!-- ORDER DETAILS -->
+
+                <div class="order-details">
+
+                  <div class="order-detail">
+
+                    <span class="detail-label">
+                      Order Date
+                    </span>
+
+                    <span class="detail-value">
+
+                      {{
+                        formatOrderDate(
+                          order.orderDate
+                        )
+                      }}
+
+                    </span>
+
+                  </div>
+
+
+
+                  <div class="order-detail">
+
+                    <span class="detail-label">
+                      Payment
+                    </span>
+
+                    <span class="detail-value">
+                      {{ order.paymentMethod }}
+                    </span>
+
+                  </div>
+
+
+
+                  <div class="order-detail">
+
+                    <span class="detail-label">
+                      Items
+                    </span>
+
+                    <span class="detail-value">
+
+                      {{ order.items.length }}
+
+                      {{
+                        order.items.length === 1
+                          ? 'item'
+                          : 'items'
+                      }}
+
+                    </span>
+
+                  </div>
+
+
+
+                  <div class="order-detail">
+
+                    <span class="detail-label">
+                      Total
+                    </span>
+
+                    <span class="detail-value order-total">
+
+                      ₹{{ order.totalAmount }}
+
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+
+                <!-- ORDER ITEMS -->
+
+                <div class="order-items">
+
+                  <h4>
+                    Items Ordered
+                  </h4>
+
+
+                  @for (
+                    item of order.items;
+                    track item.product.id
+                  ) {
+
+                    <div class="order-item">
+
+                      <div class="order-item-image">
+
+                        <img
+                          [src]="item.product.image"
+                          [alt]="item.product.name">
+
+                      </div>
+
+
+                      <div class="order-item-info">
+
+                        <h5>
+                          {{ item.product.name }}
+                        </h5>
+
+                        <p>
+                          {{ item.product.category }}
+                        </p>
+
+                        <span>
+                          Qty: {{ item.quantity }}
+                        </span>
+
+                      </div>
+
+
+                      <div class="order-item-price">
+
+                        ₹{{
+                          item.product.price *
+                          item.quantity
+                        }}
+
+                      </div>
+
+                    </div>
+
+                  }
+
+                </div>
+
+
+
+                <!-- SHIPPING ADDRESS -->
+
+                <div class="order-address">
+
+                  <span class="detail-label">
+                    Delivery Address
+                  </span>
+
+                  <p>
+                    {{ order.shippingAddress }}
+                  </p>
+
+                </div>
+
+
+
+                <!-- ORDER ACTIONS -->
+
+                <div class="order-actions">
+
+                  @if (canCancelOrder(order)) {
+
+                    <button
+                      type="button"
+                      class="cancel-order-button"
+                      (click)="cancelUserOrder(order.id)">
+
+                      Cancel Order
+
+                    </button>
+
+                  }
+
+                  @else if (order.status === 'Cancelled') {
+
+                    <span class="cancelled-message">
+                      This order has been cancelled.
+                    </span>
+
+                  }
+
+                  @else if (order.status === 'Delivered') {
+
+                    <span class="delivered-message">
+                      This order has been delivered.
+                    </span>
+
+                  }
+
+                </div>
+
+              </article>
+
+            }
+
+          </div>
+
+        }
+
+      </section>
+
+
+
+      <!-- =========================
+           QUICK ACCESS
+      ========================= -->
+
+      <section class="account-actions">
+
+        <div class="section-heading">
+
+          <p>QUICK ACCESS</p>
+
+          <h2>
+            Explore
+          </h2>
+
+        </div>
+
+
+        <div class="action-grid">
+
+          <!-- WISHLIST -->
+
+          <a
+            routerLink="/wishlist"
+            class="account-card">
+
+            <div class="card-icon">
+              ♡
+            </div>
+
+            <div class="card-content">
+
+              <h3>
+                My Wishlist
+              </h3>
+
+              <p>
+                View your saved jewellery pieces.
+              </p>
+
+            </div>
+
+            <span class="arrow">
+              →
+            </span>
+
+          </a>
+
+
+
+          <!-- CART -->
+
+          <a
+            routerLink="/cart"
+            class="account-card">
+
+            <div class="card-icon">
+              🛍
+            </div>
+
+            <div class="card-content">
+
+              <h3>
+                My Cart
+              </h3>
+
+              <p>
+                View and manage your shopping cart.
+              </p>
+
+            </div>
+
+            <span class="arrow">
+              →
+            </span>
+
+          </a>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =========================
+           LOGOUT
+      ========================= -->
+
+      <section class="logout-section">
+
+        <button
+          type="button"
+          class="logout-button"
+          (click)="logout()">
+
+          Logout
+
+        </button>
+
+      </section>
+
+    }
+
+
+
+    @else {
+
+      <div class="loading">
+
+        <p>
+          Loading account...
+        </p>
+
+      </div>
+
+    }
+
+
+
+    <!-- =========================
+         DELETE ADDRESS CONFIRMATION
+    ========================= -->
+
+    @if (isDeleteConfirmOpen) {
+
+      <div
+        class="delete-modal-overlay"
+        (click)="cancelDelete()">
+
+        <div
+          class="delete-modal"
+          (click)="$event.stopPropagation()">
+
+          <p class="modal-brand">
+            ZELL COLLECTION
+          </p>
+
+          <h2>
+            Remove this address?
+          </h2>
+
+          <p class="modal-message">
+            Are you sure you want to delete this saved
+            address? This action cannot be undone.
+          </p>
+
+
+          <div class="modal-actions">
+
+            <button
+              type="button"
+              class="cancel-delete-button"
+              (click)="cancelDelete()">
+
+              Keep Address
+
+            </button>
+
+
+            <button
+              type="button"
+              class="confirm-delete-button"
+              (click)="confirmDelete()">
+
+              Delete Address
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

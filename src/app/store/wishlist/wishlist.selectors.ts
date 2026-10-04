@@ -7,22 +7,38 @@ import { WishlistState } from './wishlist.state';
 
 
 export const selectWishlistState =
-  createFeatureSelector<WishlistState>('wishlist');
+  createFeatureSelector<WishlistState>(
+    'wishlist'
+  );
 
 
-export const selectWishlistItems = createSelector(
-  selectWishlistState,
-  state => state.items
-);
+export const selectWishlistItems =
+  createSelector(
+    selectWishlistState,
+    state => state.items
+  );
 
 
-export const selectWishlistCount = createSelector(
-  selectWishlistState,
-  state => state.items.length
-);
+export const selectWishlistCount =
+  createSelector(
+    selectWishlistState,
+    state => state.items.length
+  );
 
 
-export const selectIsWishlistEmpty = createSelector(
-  selectWishlistState,
-  state => state.items.length === 0
-);
+export const selectIsWishlistEmpty =
+  createSelector(
+    selectWishlistState,
+    state => state.items.length === 0
+  );
+
+export const selectIsProductInWishlist = (
+  productId: string
+) =>
+  createSelector(
+    selectWishlistItems,
+    items =>
+      items.some(
+        item => item.productId === productId
+      )
+  );

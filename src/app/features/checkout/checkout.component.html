@@ -1,242 +1,939 @@
+<app-header></app-header>
+
 <div class="checkout-page">
 
-  <!-- Checkout Header -->
+  <!-- =========================
+       CHECKOUT HEADER
+  ========================= -->
 
-  <div class="checkout-header">
+  <section class="checkout-header">
 
-    <p>ZELL COLLECTION</p>
+    <p class="checkout-label">
+      ZELL COLLECTION
+    </p>
 
-    <h1>Checkout</h1>
+    <h1>
+      Checkout
+    </h1>
 
-    <span>Complete your order</span>
+    <p>
+      Complete your order securely.
+    </p>
 
-  </div>
+  </section>
 
 
-  <!-- Checkout Content -->
+  <!-- =========================
+       MAIN CHECKOUT
+  ========================= -->
 
   <div class="checkout-container">
 
-    <!-- Shipping Details -->
+    <!-- =========================
+         LEFT SIDE
+    ========================= -->
 
-    <div class="shipping-section">
+    <div class="checkout-main">
 
-      <h2>Shipping Address</h2>
+      <!-- =========================
+           SHIPPING ADDRESS
+      ========================= -->
 
+      <section class="checkout-section">
 
-      <div class="form-group">
+        <div class="section-heading">
 
-        <label for="name">
-          Full Name
-        </label>
+          <div>
 
-        <input
-          id="name"
-          type="text"
-          name="name"
-          [(ngModel)]="shippingDetails.name"
-          placeholder="Enter your full name">
+            <p class="section-label">
+              DELIVERY
+            </p>
 
-      </div>
+            <h2>
+              Shipping Address
+            </h2>
 
-
-      <div class="form-group">
-
-        <label for="phone">
-          Phone Number
-        </label>
-
-        <input
-          id="phone"
-          type="tel"
-          name="phone"
-          [(ngModel)]="shippingDetails.phone"
-          placeholder="Enter your phone number">
-
-      </div>
+          </div>
 
 
-      <div class="form-group">
+          @if (
+            !isAddressFormOpen &&
+            addresses.length < 2
+          ) {
 
-        <label for="address">
-          Address
-        </label>
+            <button
+              type="button"
+              class="add-address-button"
+              (click)="openAddAddress()"
+            >
+              + Add Address
+            </button>
 
-        <textarea
-          id="address"
-          name="address"
-          rows="4"
-          [(ngModel)]="shippingDetails.address"
-          placeholder="House name, street, area">
-        </textarea>
-
-      </div>
-
-
-      <div class="form-row">
-
-        <div class="form-group">
-
-          <label for="city">
-            City
-          </label>
-
-          <input
-            id="city"
-            type="text"
-            name="city"
-            [(ngModel)]="shippingDetails.city"
-            placeholder="City">
+          }
 
         </div>
 
 
-        <div class="form-group">
+        <!-- ADDRESS SUCCESS -->
 
-          <label for="pincode">
-            PIN Code
-          </label>
+        @if (addressSuccess) {
 
-          <input
-            id="pincode"
-            type="text"
-            name="pincode"
-            [(ngModel)]="shippingDetails.pincode"
-            placeholder="PIN Code">
+          <div class="success-message">
+            {{ addressSuccess }}
+          </div>
+
+        }
+
+
+        <!-- ADDRESS ERROR -->
+
+        @if (addressError) {
+
+          <div class="error-message">
+            {{ addressError }}
+          </div>
+
+        }
+
+
+        <!-- =========================
+             LOADING
+        ========================= -->
+
+        @if (addressLoading) {
+
+          <div class="loading-state">
+            Loading saved addresses...
+          </div>
+
+        }
+
+
+        <!-- =========================
+             SAVED ADDRESSES
+        ========================= -->
+
+        @if (
+          !addressLoading &&
+          addresses.length > 0
+        ) {
+
+          <div class="saved-addresses">
+
+            <h3>
+              Saved Addresses
+            </h3>
+
+
+            @for (
+              address of addresses;
+              track address.id
+            ) {
+
+              <div
+                class="address-card"
+                [class.selected]="
+                  selectedAddressId === address.id
+                "
+              >
+
+                <label class="address-select">
+
+                  <input
+                    type="radio"
+                    name="selectedAddress"
+                    [value]="address.id"
+                    [(ngModel)]="selectedAddressId"
+                  />
+
+
+                  <div class="address-content">
+
+                    <div class="address-top">
+
+                      <strong>
+                        {{ address.fullName }}
+                      </strong>
+
+
+                      @if (address.isDefault) {
+
+                        <span class="default-badge">
+                          Default
+                        </span>
+
+                      }
+
+                    </div>
+
+
+                    <span>
+                      {{ address.phone }}
+                    </span>
+
+                    <span>
+                      {{ address.addressLine }}
+                    </span>
+
+                    <span>
+                      {{ address.city }},
+                      {{ address.state }}
+                      - {{ address.pincode }}
+                    </span>
+
+                  </div>
+
+                </label>
+
+
+                <!-- ADDRESS ACTIONS -->
+
+                <div class="address-actions">
+
+                  <button
+                    type="button"
+                    class="edit-address-button"
+                    (click)="editAddress(address)"
+                  >
+                    Edit
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="delete-address-button"
+                    (click)="openDeleteAddressPopup(address)"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+
+              </div>
+
+            }
+
+          </div>
+
+        }
+
+
+        <!-- =========================
+             NO ADDRESS
+        ========================= -->
+
+        @if (
+          !addressLoading &&
+          addresses.length === 0 &&
+          !isAddressFormOpen
+        ) {
+
+          <div class="empty-address">
+
+            <p>
+              No saved address found.
+            </p>
+
+
+            <button
+              type="button"
+              class="add-first-address-button"
+              (click)="openAddAddress()"
+            >
+              Add Your Address
+            </button>
+
+          </div>
+
+        }
+
+
+        <!-- =========================
+             ADDRESS FORM
+        ========================= -->
+
+        @if (isAddressFormOpen) {
+
+          <div class="address-form">
+
+            <div class="form-heading">
+
+              <div>
+
+                <p class="section-label">
+
+                  {{
+                    isEditingAddress
+                      ? 'UPDATE ADDRESS'
+                      : 'NEW ADDRESS'
+                  }}
+
+                </p>
+
+
+                <h3>
+
+                  {{
+                    isEditingAddress
+                      ? 'Edit Address'
+                      : 'Add New Address'
+                  }}
+
+                </h3>
+
+              </div>
+
+
+              <button
+                type="button"
+                class="close-form-button"
+                (click)="cancelAddressForm()"
+              >
+                ×
+              </button>
+
+            </div>
+
+
+            <!-- FULL NAME -->
+
+            <div class="form-group">
+
+              <label for="fullName">
+                Full Name
+              </label>
+
+
+              <input
+                id="fullName"
+                type="text"
+                name="fullName"
+                [(ngModel)]="addressForm.fullName"
+                placeholder="Enter your full name"
+              />
+
+
+              @if (
+                addressForm.fullName &&
+                addressForm.fullName.trim().length < 2
+              ) {
+
+                <small>
+                  Please enter a valid name.
+                </small>
+
+              }
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+              <label for="phone">
+                Phone Number
+              </label>
+
+
+              <input
+                id="phone"
+                type="tel"
+                name="phone"
+                maxlength="10"
+                [(ngModel)]="addressForm.phone"
+                placeholder="10 digit mobile number"
+              />
+
+
+              @if (
+                addressForm.phone &&
+                addressForm.phone.length !== 10
+              ) {
+
+                <small>
+                  Enter a valid 10 digit phone number.
+                </small>
+
+              }
+
+            </div>
+
+
+            <!-- ADDRESS -->
+
+            <div class="form-group">
+
+              <label for="addressLine">
+                Address
+              </label>
+
+
+              <textarea
+                id="addressLine"
+                name="addressLine"
+                rows="3"
+                [(ngModel)]="addressForm.addressLine"
+                placeholder="House name, street, landmark..."
+              ></textarea>
+
+            </div>
+
+
+            <!-- CITY + STATE -->
+
+            <div class="form-row">
+
+              <div class="form-group">
+
+                <label for="city">
+                  City
+                </label>
+
+
+                <input
+                  id="city"
+                  type="text"
+                  name="city"
+                  [(ngModel)]="addressForm.city"
+                  placeholder="City"
+                />
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="state">
+                  State
+                </label>
+
+
+                <input
+                  id="state"
+                  type="text"
+                  name="state"
+                  [(ngModel)]="addressForm.state"
+                  placeholder="State"
+                />
+
+              </div>
+
+            </div>
+
+
+            <!-- PINCODE -->
+
+            <div class="form-group">
+
+              <label for="pincode">
+                Pincode
+              </label>
+
+
+              <input
+                id="pincode"
+                type="text"
+                name="pincode"
+                maxlength="6"
+                [(ngModel)]="addressForm.pincode"
+                placeholder="6 digit pincode"
+              />
+
+
+              @if (
+                addressForm.pincode &&
+                addressForm.pincode.length !== 6
+              ) {
+
+                <small>
+                  Enter a valid 6 digit pincode.
+                </small>
+
+              }
+
+            </div>
+
+
+            <!-- FORM ERROR -->
+
+            @if (addressError) {
+
+              <div class="error-message">
+                {{ addressError }}
+              </div>
+
+            }
+
+
+            <!-- FORM ACTIONS -->
+
+            <div class="form-actions">
+
+              <button
+                type="button"
+                class="cancel-form-button"
+                (click)="cancelAddressForm()"
+              >
+                Cancel
+              </button>
+
+
+              <button
+                type="button"
+                class="save-address-button"
+                (click)="saveAddress()"
+                [disabled]="!isAddressValid()"
+              >
+
+                @if (isEditingAddress) {
+
+                  Update Address
+
+                } @else {
+
+                  Save Address
+
+                }
+
+              </button>
+
+            </div>
+
+          </div>
+
+        }
+
+      </section>
+
+
+      <!-- =========================
+           PAYMENT METHOD
+      ========================= -->
+
+      <section class="checkout-section">
+
+        <div class="section-heading">
+
+          <div>
+
+            <p class="section-label">
+              PAYMENT
+            </p>
+
+            <h2>
+              Payment Method
+            </h2>
+
+          </div>
 
         </div>
 
-      </div>
+
+        <!-- PAYMENT ERROR -->
+
+        @if (paymentError) {
+
+          <div class="error-message">
+            {{ paymentError }}
+          </div>
+
+        }
+
+
+        <div class="payment-methods">
+
+          <!-- COD -->
+
+          <label
+            class="payment-card"
+            [class.selected]="paymentMethod === 'COD'"
+          >
+
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="COD"
+              [(ngModel)]="paymentMethod"
+              (change)="onPaymentMethodChange()"
+            />
+
+
+            <div>
+
+              <strong>
+                Cash on Delivery
+              </strong>
+
+              <span>
+                Pay when your order arrives.
+              </span>
+
+            </div>
+
+          </label>
+
+
+          <!-- UPI -->
+
+          <label
+            class="payment-card"
+            [class.selected]="paymentMethod === 'UPI'"
+          >
+
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="UPI"
+              [(ngModel)]="paymentMethod"
+              (change)="onPaymentMethodChange()"
+            />
+
+
+            <div>
+
+              <strong>
+                UPI
+              </strong>
+
+              <span>
+                Pay using your UPI ID.
+              </span>
+
+            </div>
+
+          </label>
+
+
+          <!-- CARD -->
+
+          <label
+            class="payment-card"
+            [class.selected]="paymentMethod === 'CARD'"
+          >
+
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="CARD"
+              [(ngModel)]="paymentMethod"
+              (change)="onPaymentMethodChange()"
+            />
+
+
+            <div>
+
+              <strong>
+                Card Payment
+              </strong>
+
+              <span>
+                Pay securely using your card.
+              </span>
+
+            </div>
+
+          </label>
+
+        </div>
+
+
+        <!-- =========================
+             UPI FIELD
+        ========================= -->
+
+        @if (paymentMethod === 'UPI') {
+
+          <div class="upi-section">
+
+            <label for="upiId">
+              UPI ID
+            </label>
+
+
+            <input
+              id="upiId"
+              type="text"
+              name="upiId"
+              [(ngModel)]="upiId"
+              placeholder="example@upi"
+            />
+
+
+            @if (
+              upiId &&
+              !isUpiValid()
+            ) {
+
+              <small>
+                Please enter a valid UPI ID.
+              </small>
+
+            }
+
+          </div>
+
+        }
+
+      </section>
+
+
+      <!-- =========================
+           ORDER ERROR
+      ========================= -->
+
+      @if (orderError) {
+
+        <div class="error-message order-error">
+          {{ orderError }}
+        </div>
+
+      }
 
     </div>
 
-    <!-- Payment Method -->
 
-<div class="payment-section">
+    <!-- =========================
+         RIGHT SIDE - ORDER SUMMARY
+    ========================= -->
 
-  <h2>
-    Payment Method
-  </h2>
+    <aside class="order-summary">
 
-  <div class="payment-options">
+      <div class="summary-header">
 
-    <label>
-      <input
-        type="radio"
-        name="paymentMethod"
-        value="Cash on Delivery"
-        [(ngModel)]="paymentMethod">
-
-      <span>
-        Cash on Delivery
-      </span>
-    </label>
+        <p class="section-label">
+          YOUR ORDER
+        </p>
 
 
-    <label>
-      <input
-        type="radio"
-        name="paymentMethod"
-        value="UPI"
-        [(ngModel)]="paymentMethod">
+        <h2>
+          Order Summary
+        </h2>
 
-      <span>
-        UPI
-      </span>
-    </label>
-
-
-    <label>
-      <input
-        type="radio"
-        name="paymentMethod"
-        value="Card Payment"
-        [(ngModel)]="paymentMethod">
-
-      <span>
-        Card Payment
-      </span>
-    </label>
-
-  </div>
-
-</div>
-
-
-    <!-- Order Summary -->
-
-    <div class="order-summary">
-
-      <h2>Order Summary</h2>
+      </div>
 
 
       @if (cartItems$ | async; as items) {
 
-        @if (items.length > 0) {
+        <div class="order-items">
 
-          @for (item of items; track item.product.id) {
+          @for (
+            item of items;
+            track item.product.id
+          ) {
 
             <div class="order-item">
 
-              <div>
+              <img
+                [src]="item.product.image"
+                [alt]="item.product.name"
+              />
+
+
+              <div class="order-item-info">
 
                 <h3>
                   {{ item.product.name }}
                 </h3>
 
-                <p>
+
+                <span>
                   Qty: {{ item.quantity }}
-                </p>
+                </span>
+
+
+                <strong>
+                  ₹{{ item.product.price * item.quantity }}
+                </strong>
 
               </div>
-
-              <span>
-                ₹{{ item.product.price * item.quantity }}
-              </span>
 
             </div>
 
           }
 
-        } @else {
-
-          <p>
-            Your cart is empty.
-          </p>
-
-        }
+        </div>
 
       }
 
 
-      <!-- Total -->
-
-      <div class="summary-total">
-
-        <span>
-          Total
-        </span>
-
-        <strong>
-          ₹{{ cartTotal$ | async }}
-        </strong>
-
-      </div>
+      <div class="summary-divider"></div>
 
 
-      <!-- Place Order -->
+      @if (cartTotal$ | async; as total) {
+
+        <div class="summary-total">
+
+          <span>
+            Total
+          </span>
+
+
+          <strong>
+            ₹{{ total }}
+          </strong>
+
+        </div>
+
+      }
+
+
+      <!-- PLACE ORDER -->
 
       <button
         type="button"
         class="place-order-button"
-        (click)="placeOrder()">
+        (click)="placeOrder()"
+        [disabled]="
+          isPlacingOrder ||
+          !selectedAddressId ||
+          !paymentMethod
+        "
+      >
 
-        Place Order
+        @if (isPlacingOrder) {
+
+          Placing Order...
+
+        } @else {
+
+          Place Order
+
+        }
 
       </button>
+
+
+      <p class="secure-text">
+        Your order details are securely processed.
+      </p>
+
+    </aside>
+
+  </div>
+
+</div>
+
+
+<!-- ==================================================
+     DELETE ADDRESS CONFIRMATION POPUP
+================================================== -->
+
+@if (
+  isDeletePopupOpen &&
+  addressToDelete
+) {
+
+  <div
+    class="delete-popup-overlay"
+    (click)="cancelDeleteAddress()"
+  >
+
+    <div
+      class="delete-popup"
+      (click)="$event.stopPropagation()"
+    >
+
+      <!-- CLOSE -->
+
+      <button
+        type="button"
+        class="popup-close-button"
+        (click)="cancelDeleteAddress()"
+        [disabled]="isDeletingAddress"
+      >
+        ×
+      </button>
+
+
+      <!-- ICON -->
+
+      <div class="delete-popup-icon">
+        ×
+      </div>
+
+
+      <p class="delete-popup-label">
+        ZELL COLLECTION
+      </p>
+
+
+      <h2>
+        Remove Address?
+      </h2>
+
+
+      <p class="delete-popup-message">
+        Are you sure you want to remove this
+        saved address?
+      </p>
+
+
+      <!-- ADDRESS PREVIEW -->
+
+      <div class="delete-address-preview">
+
+        <strong>
+          {{ addressToDelete.fullName }}
+        </strong>
+
+
+        <span>
+          {{ addressToDelete.phone }}
+        </span>
+
+
+        <span>
+          {{ addressToDelete.addressLine }}
+        </span>
+
+
+        <span>
+          {{ addressToDelete.city }},
+          {{ addressToDelete.state }}
+          - {{ addressToDelete.pincode }}
+        </span>
+
+      </div>
+
+
+      <!-- POPUP ACTIONS -->
+
+      <div class="delete-popup-actions">
+
+        <button
+          type="button"
+          class="cancel-delete-button"
+          (click)="cancelDeleteAddress()"
+          [disabled]="isDeletingAddress"
+        >
+          Keep Address
+        </button>
+
+
+        <button
+          type="button"
+          class="confirm-delete-button"
+          (click)="confirmDeleteAddress()"
+          [disabled]="isDeletingAddress"
+        >
+
+          @if (isDeletingAddress) {
+
+            Removing...
+
+          } @else {
+
+            Remove Address
+
+          }
+
+        </button>
+
+      </div>
 
     </div>
 
   </div>
 
-</div>
+}

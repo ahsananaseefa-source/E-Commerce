@@ -1,7 +1,12 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
+import {
+  HttpClient,
+  HttpParams
+} from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+
 import { map } from 'rxjs/operators';
 
 import { WishlistItem } from '../models/wishlist-item.models';
@@ -14,22 +19,26 @@ export class WishlistService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:3000/wishlist';
+  private apiUrl =
+    'http://localhost:3000/wishlist';
 
 
-  // Get current user's wishlist
   getWishlist(
-    userId: number
+    userId: string
   ): Observable<WishlistItem[]> {
 
+    const params =
+      new HttpParams()
+        .set('userId', userId);
+
     return this.http.get<WishlistItem[]>(
-      `${this.apiUrl}?userId=${userId}`
+      this.apiUrl,
+      { params }
     );
 
   }
 
 
-  // Add product to wishlist
   addToWishlist(
     item: WishlistItem
   ): Observable<WishlistItem> {
@@ -42,9 +51,8 @@ export class WishlistService {
   }
 
 
-  // Remove one wishlist item
   removeFromWishlist(
-    id: number
+    id: string
   ): Observable<void> {
 
     return this.http.delete<void>(
@@ -54,18 +62,29 @@ export class WishlistService {
   }
 
 
-  // Check whether product is already in wishlist
   isInWishlist(
-    productId: number,
-    userId: number
+    productId: string,
+    userId: string
   ): Observable<boolean> {
 
+    const params =
+      new HttpParams()
+        .set('userId', userId)
+        .set('productId', productId);
+
     return this.http
+
       .get<WishlistItem[]>(
-        `${this.apiUrl}?userId=${userId}&productId=${productId}`
+        this.apiUrl,
+        { params }
       )
+
       .pipe(
-        map(items => items.length > 0)
+
+        map(items =>
+          items.length > 0
+        )
+
       );
 
   }
